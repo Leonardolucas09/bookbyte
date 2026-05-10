@@ -7,6 +7,7 @@
     import avaliacoes from '../assets/sidebar/avaliacoes.png'
     import meuPerfil from '../assets/sidebar/perfil.png'
     import sair from '../assets/sidebar/sair.png'
+    import InputBuscarLivros from './InputBuscarLivros.vue'
 
     defineProps({
         isOpen: Boolean
@@ -28,13 +29,14 @@
         class="fixed inset-0 z-40" 
         @click="handleClose">
     </div>
-        <div class="flex justify-center px-8 gap-4">        
+        <div class="flex justify-start items-center px-8 gap-4">        
             <div class="toggle cursor-pointer" @click="handleToggle">
                 <svg width="30" height="30" viewBox="0 0 23 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1.5 1.5H21.5M1.5 9.2037H21.5M1.5 17.5H21.5" stroke="white" stroke-width="3" stroke-linecap="round"/>
                 </svg>
             </div>
 
+            <InputBuscarLivros/>
         </div>
 
         <div class="slide bg-black absolute py-3 px-5 top-0 z-50" 
