@@ -1,11 +1,24 @@
 <script setup>
-import BarraLateral from './components/BarraLateral.vue';
-import Cabecalho from './components/Cabecalho.vue';
-// import HelloWorld from './components/HelloWorld.vue'
+import { ref } from "vue";
+import BarraLateral from "./components/BarraLateral.vue";
+import Cabecalho from "./components/Cabecalho.vue";
+
+const sidebarAberta = ref(false);
+
+const toggleSidebar = () => {
+  sidebarAberta.value = !sidebarAberta.value;
+};
+
+const fecharSidebar = () => {
+  sidebarAberta.value = false;
+};
 </script>
 
 <template>
   <Cabecalho />
-  <BarraLateral/>
-  <!-- <HelloWorld /> -->
+  <BarraLateral
+    :isOpen="sidebarAberta"
+    @toggle="toggleSidebar"
+    @close="fecharSidebar"
+  />
 </template>
