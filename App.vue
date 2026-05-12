@@ -24,4 +24,5 @@ const fecharSidebar = () => {
     @close="fecharSidebar"
   />
   <ScrollLivros/>
+  <Rodape/>
 </template>
