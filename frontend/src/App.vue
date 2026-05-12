@@ -2,6 +2,8 @@
 import { ref } from "vue";
 import BarraLateral from "./components/BarraLateral.vue";
 import Cabecalho from "./components/Cabecalho.vue";
+import ScrollLivros from "./components/ScrollLivros.vue";
+import Rodape from "./components/Rodape.vue";
 
 const sidebarAberta = ref(false);
 
@@ -21,5 +23,6 @@ const fecharSidebar = () => {
     @toggle="toggleSidebar"
     @close="fecharSidebar"
   />
-  
+  <ScrollLivros/>
+  <Rodape/>
 </template>

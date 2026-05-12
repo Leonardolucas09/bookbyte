@@ -49,9 +49,9 @@
                 <h1 class="text-2xl text-white font-bold">BookByte</h1>
             </div>
             
-            <div class="flex  items-center gap-2 mt-15">
+            <div class="flex items-center gap-2 mt-15">
                 <div>
-                    <img :src="userIcon" class="w-12" alt=""/>
+                    <img :src="userIcon" class="min-w-12" alt=""/>
                 </div>
                 <div class="leading-5">
                     <h2 class="text-white font-bold text-lg">Fulano ciclano</h2>
@@ -91,12 +91,18 @@
                     </a>
                 </li>
 
-                <li class="mt-70">
-                    <a href="">
-                        <img :src="sair" alt="">
-                        <p>Sair</p>
-                    </a>
-                </li>
+                <!-- 
+                    Arrumar este botão de sair, em telas de altura menor ele acaba não aparecendo. 
+                    Talvez para este caso não deva ser utilizado um relative e absolute
+                -->
+                <div class="relative">
+                    <li class="absolute top-30">
+                        <a href="">
+                            <img :src="sair" alt="">
+                            <p>Sair</p>
+                        </a>
+                    </li>
+                </div>
             </ul>
 
         </div>
@@ -104,10 +110,11 @@
 
 <style>
     .slide {
-        width: 50%; 
+        width: 70%; 
         height: 100%; 
         transition: 0.5s ease;
         transform: translateX(-100%);
+        overflow: hidden;
     }
 
     .slide ul li a {
