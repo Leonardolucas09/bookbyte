@@ -21,4 +21,5 @@ const fecharSidebar = () => {
     @toggle="toggleSidebar"
     @close="fecharSidebar"
   />
+  
 </template>
