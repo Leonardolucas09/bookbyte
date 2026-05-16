@@ -130,15 +130,6 @@
         object-fit: contain;
     }
 
-    .comum {
-        position: absolute;
-        height: 3px;
-        width: 100%;
-        background-color: #FFF;
-        border-radius: 50px;
-        transition: 0.3s ease;
-    }
-
     .slide-open {
         transform: translateX(0);
     }
