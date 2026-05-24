@@ -1,1 +1,0 @@
-# bookbyte - gerenciador de estante de livros particular
