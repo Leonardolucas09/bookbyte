@@ -1,8 +1,13 @@
 @import 'tailwindcss';
 
-/* :root {
+@theme {
+    --animate-scroll: scroll 280s linear infinite;
 
-} */
+    @keyframes scroll {
+        0%   { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+}
 
 body {
   margin: 0;
