@@ -1,3 +1,11 @@
+<script setup>
+  const emit = defineEmits(['navigate']);
+
+  const goToHome = () => {
+    emit('navigate', 'home');
+  }
+</script>
+
 <template>
   <div class="cardTelaLogin">
     <div class="containerTelaLogin">
@@ -10,7 +18,7 @@
               <label class="checkbox-containerTelaLogin">
               <input type="checkbox" />Lembrar-me</label>
               </div>
-                <button class="btn-entrarTelaLogin">Entrar</button>
+                <button class="btn-entrarTelaLogin" @click="goToHome">Entrar</button>
                   <div class="senha-boxTelaLogin">
                   <a href="#" class="esquecisenha">Esqueci minha senha</a>
                   </div>
