@@ -13,7 +13,13 @@ defineProps({
     isOpen: Boolean
 });
 
-const emit = defineEmits(['toggle', 'close']);
+const emit = defineEmits(['toggle', 'close', 'navigate']);
+
+const goToIntroducao = () => {
+    setTimeout(() => {
+        emit('navigate', 'introducao');
+    }, 3200);
+};
 
 const handleToggle = () => {
     emit('toggle');
@@ -143,7 +149,7 @@ const logOutMessage = () => {
                     </a>
                 </li>
             </ul>
-            <a href="" class="fundo" @click.prevent="logOutMessage">
+            <a @click="goToIntroducao" class="fundo" @click.prevent="logOutMessage">
                 <img :src="sair" alt="">
                 <p>Sair</p>
             </a>
