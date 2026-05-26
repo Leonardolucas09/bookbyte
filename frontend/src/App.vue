@@ -5,7 +5,8 @@ import BarraLateral from "./components/BarraLateral.vue";
 import Cabecalho from "./components/Cabecalho.vue";
 import ScrollLivros from "./components/ScrollLivros.vue";
 import Rodape from "./components/Rodape.vue";
-import TelaIntroducao from "./Pages/TelaIntroducao.vue";
+import Introducao from "./Pages/Introducao.vue";
+import Login from "./Pages/Login.vue";
 
 const sidebarAberta = ref(false);
 
@@ -19,13 +20,14 @@ const fecharSidebar = () => {
 </script>
 
 <template>
-  <Cabecalho />
+  <!-- <Cabecalho />
   <BarraLateral
     :isOpen="sidebarAberta"
     @toggle="toggleSidebar"
     @close="fecharSidebar"
   />
   <ScrollLivros/>
-  <Rodape/>
-  <!-- <TelaIntroducao/> -->
+  <Rodape/> -->
+  <!-- <Login/> -->
+  <Introducao/>
 </template>

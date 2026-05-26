@@ -22,6 +22,63 @@ const handleToggle = () => {
 const handleClose = () => {
     emit('close');
 };
+
+const logOutMessage = () => {
+    handleClose();
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100vw';
+    overlay.style.height = '100vh';
+    overlay.style.background= 'rgba(0, 0, 0, 0.25)';
+    overlay.style.backdropFilter='blur(3px)';
+    overlay.style.webkitBackdropFilter='blur(3px)';
+    overlay.style.zIndex = '9998';
+    document.body.appendChild(overlay);
+    const toast = document.createElement('div');
+    toast.innerHTML = `
+    <div class="toast-bar"></div>
+        <div class="toast-text">
+            <p>Saindo da conta...</p>
+        </div>
+    `;
+    toast.style.position = 'fixed';
+    toast.style.bottom = '30px';
+    toast.style.left='50%';
+    toast.style.transform = 'translateX(-50%)';
+    toast.style.width='260px';
+    toast.style.background='#111';
+    toast.style.color='#fff';
+    toast.style.padding = '16px';
+    toast.style.boxShadow = '0 0 15px rgba(39,239,178,0.25)';
+    toast.style.zIndex = '9999';
+    toast.style.fontFamily='poppins, sans-serif';
+    toast.style.overflow = 'hidden';
+    document.body.appendChild(toast);
+
+    const bar = toast.querySelector('.toast-bar');
+    bar.style.position = 'absolute';
+    bar.style.top='0';
+    bar.style.right='0';
+    bar.style.height = '3px';
+    bar.style.opacity = '0.8';
+    bar.style.width='100%';
+    bar.style.background='#27efb2';
+    bar.style.transition = 'width 3s linear';
+    setTimeout(() => {
+        bar.style.width = '0';
+    }, 100);
+    toast.style.transition = 'opacity 0.3s ease';
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => {
+            toast.remove();
+            overlay.remove();
+        }, 300);
+    }, 3000);
+};
+
 </script>
 
 <template>
@@ -86,7 +143,7 @@ const handleClose = () => {
                     </a>
                 </li>
             </ul>
-            <a href="" class="fundo">
+            <a href="" class="fundo" @click.prevent="logOutMessage">
                 <img :src="sair" alt="">
                 <p>Sair</p>
             </a>
