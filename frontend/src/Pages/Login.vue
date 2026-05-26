@@ -1,44 +1,29 @@
 <template>
-  <!-- fundo da tela inteira -->
-  <div class="card">
-    <!-- quadrado do login -->  
-    <div class="container">
-      <!-- quadrado do formulario -->
-        <div class="form-box">
-        <!-- texto de entrar (titulo) -->    
-          <div class="text-title">Entrar</div>
-          <!-- parte inteira do formulario -->
-            <div class="formulario">
-            <!-- campo emeil e senha -->
-            <input type="email" placeholder="Digite seu e-mail" class="input-email"/>
-            <input type="password" placeholder="Digite sua senha" class="input-senha"/>
-              <!-- quadrado p lembrar d mim -->
+  <div class="cardTelaLogin">
+    <div class="containerTelaLogin">
+        <div class="form-boxTelaLogin">   
+          <div class="text-titleTelaLogin">Entrar</div>
+            <div class="formularioTelaLogin">
+            <input type="email" placeholder="Digite seu e-mail" class="input-emailTelaLogin"/>
+            <input type="password" placeholder="Digite sua senha" class="input-senhaTelaLogin"/>
               <div class="lembrarme">
-              <label class="checkbox-container">
+              <label class="checkbox-containerTelaLogin">
               <input type="checkbox" />Lembrar-me</label>
               </div>
-                <!-- botão entrar -->
-                <button class="btn-entrar">Entrar</button>
-                  <!-- botao esqueci minha senha -->
-                  <div class="senha-box">
+                <button class="btn-entrarTelaLogin">Entrar</button>
+                  <div class="senha-boxTelaLogin">
                   <a href="#" class="esquecisenha">Esqueci minha senha</a>
                   </div>
                 </div>
             </div>
           </div>
-    <p class="footer-text">@2026 BugOps</p>
+    <p class="footer-textTelaLogin">@2026 BugOps</p>
   </div>
 </template>
 
 <style>
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.card{
+.cardTelaLogin{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,7 +34,7 @@
 }
 
 
-.container {
+.containerTelaLogin {
   height: 640px;
   width: 320px;
   padding-top: 65px;
@@ -62,7 +47,7 @@
   position: relative;
   overflow: hidden;
 }
-.form-box{
+.form-boxTelaLogin{
   width: 260px;
   height: 430px;
   background: #111;
@@ -75,7 +60,7 @@
   margin-top: 60px;
 }
 
-.text-title{
+.text-titleTelaLogin{
   align-items: center;
   color:#d9d9d9;
   font-size: 20px;
@@ -83,7 +68,7 @@
   margin-bottom: 30px;
 }
 
-.input-email, .input-senha {
+.input-emailTelaLogin, .input-senhaTelaLogin {
   width: 230px;
   height: 50px;
   border-radius: 14px;
@@ -94,10 +79,10 @@
   color: #fff;
 
 }
-.input-email::placeholder, .input-senha::placeholder {
+.input-emailTelaLogin::placeholder, .input-senhaTelaLogin::placeholder {
   color: #a1a1a1;
 }
-.input-email:focus, .input-senha:focus {
+.input-emailTelaLogin:focus, .input-senhaTelaLogin:focus {
   outline: none;
   box-shadow: 0 0 5px rgba(39,239,178,0.5);
 }
@@ -108,7 +93,7 @@
   width: 250px;
   margin-top: 15px;
 }
-.checkbox-container {
+.checkbox-containerTelaLogin {
   display: flex;
   align-items: center;
   color: #c5c5c5;
@@ -116,13 +101,13 @@
   margin-left:10px;
 }
 
-.checkbox-container input {
+.checkbox-containerTelaLogin input {
   accent-color: #27efb2;
   margin-right: 8px;
   cursor: pointer;
 }
 
-.checkbox-container input:checked{
+.checkbox-containerTelaLogin input:checked{
   box-shadow: 0 0 5px #27efb2, 0 0 10px #27efb2;
 
 }
@@ -138,7 +123,7 @@
   color: #27efb2;
 }
 
-.btn-entrar{
+.btn-entrarTelaLogin{
   width: 230px;
   height: 50px;
   border-radius: 8px;
@@ -152,13 +137,13 @@
   transition: 0.3s;
 }
 
-.btn-entrar:hover{
+.btn-entrarTelaLogin:hover{
   background-color: #27efb2;
   box-shadow: 0 0 10px rgba(39,239,178,0.5);
   transform: scale(1.03);
 }
 
-.formulario{
+.formularioTelaLogin{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -168,7 +153,7 @@
   margin-top:15px;
 } 
 
-.footer-text{
+.footer-textTelaLogin{
   position: absolute;
   bottom: 20px;
   font-size: 12px;

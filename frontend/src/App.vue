@@ -6,6 +6,7 @@ import Cabecalho from "./components/Cabecalho.vue";
 import ScrollLivros from "./components/ScrollLivros.vue";
 import Rodape from "./components/Rodape.vue";
 import TelaIntroducao from "./Pages/TelaIntroducao.vue";
+import Login from "./Pages/Login.vue";
 
 const sidebarAberta = ref(false);
 
@@ -27,5 +28,6 @@ const fecharSidebar = () => {
   />
   <ScrollLivros/>
   <Rodape/>
+  <!-- <Login/> -->
   <!-- <TelaIntroducao/> -->
 </template>
