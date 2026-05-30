@@ -4,11 +4,13 @@
   import Introducao from "./Pages/Introducao.vue";
   import Login from "./Pages/Login.vue";
   import Home from "./Pages/Home.vue";
+  import Perfil from "./Pages/Perfilmenu.vue";
 
   const routes = {
     "": Home,
     "login": Login,
     "introducao": Introducao,
+    "perfil": Perfil
   }
 
   const currentRoute = ref("");
