@@ -21,12 +21,15 @@
 
 <template>
     <Cabecalho />
-    <BarraLateral
+    <div class="px-8">
+        <BarraLateral
+        :isHome="true"
         :isOpen="sidebarAberta"
         @toggle="toggleSidebar"
         @close="fecharSidebar"
         @navigate="$emit('navigate', $event)"
-    />
+        />
+    </div>
     <ScrollLivros/>
     <Rodape/>
 </template>

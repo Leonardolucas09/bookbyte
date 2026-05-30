@@ -4,7 +4,7 @@
   import Introducao from "./Pages/Introducao.vue";
   import Login from "./Pages/Login.vue";
   import Home from "./Pages/Home.vue";
-  import Perfil from "./Pages/Perfilmenu.vue";
+  import Perfil from "./Pages/PerfilMenu.vue";
 
   const routes = {
     "": Home,
