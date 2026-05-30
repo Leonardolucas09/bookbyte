@@ -1,125 +1,15 @@
 <script setup>
     import { useTemplateRef } from 'vue';
+    import { livros } from '../data/livros.js'
 
     const carrossel = useTemplateRef('carrossel')
-    
+
     function scrollDireita() {
-        carrossel.value.scrollBy({ 
+        carrossel.value.scrollBy({
             left: 300, behavior: 'smooth'
         })
     }
 
-    const livros = [
-        {
-            id: 1,
-            isbn: "978-85-828-5119-7",
-            titulo: "1984",
-            autor: "George Orwell",
-            dataPublicacao: "2020-11-21",
-            avaliacoes: 4.8,
-            editora: "Penguin-Companhia das Letras",
-            idioma: "Português",
-            paginas: 392,
-            capa: "https://covers.openlibrary.org/b/isbn/9788582851197-L.jpg"
-        },
-        {
-            id: 2,
-            isbn: "978-85-220-3145-0",
-            titulo: "O Pequeno Príncipe",
-            autor: "Antoine de Saint-Exupéry",
-            dataPublicacao: "2015-05-01",
-            avaliacoes: 4.9,
-            editora: "Agir",
-            idioma: "Português",
-            paginas: 96,
-            capa: "https://covers.openlibrary.org/b/isbn/9788522031450-L.jpg"
-        },
-        {
-            id: 3,
-            isbn: "978-85-336-1516-8",
-            titulo: "O Senhor dos Anéis",
-            autor: "J. R. R. Tolkien",
-            dataPublicacao: "2001-01-01",
-            avaliacoes: 4.9,
-            editora: "Martins Fontes",
-            idioma: "Português",
-            paginas: 1211,
-            capa: "https://covers.openlibrary.org/b/isbn/9788533613409-L.jpg"
-        },
-        {
-            id: 4,
-            isbn: "978-85-03-00949-2",
-            titulo: "O Sol É Para Todos",
-            autor: "Harper Lee",
-            dataPublicacao: "2006-10-10",
-            avaliacoes: 4.8,
-            editora: "José Olympio",
-            idioma: "Português",
-            paginas: 349,
-            capa: "https://covers.openlibrary.org/b/isbn/9788503009492-L.jpg"
-        },
-        {
-            id: 5,
-            isbn: "978-85-7657-101-8",
-            titulo: "Duna",
-            autor: "Frank Herbert",
-            dataPublicacao: "2010-11-24",
-            avaliacoes: 4.8,
-            editora: "Aleph",
-            idioma: "Português",
-            paginas: 544,
-            capa: "https://covers.openlibrary.org/b/isbn/9788576571018-L.jpg"
-        },
-        {
-            id: 6,
-            isbn: "978-85-7164-685-8",
-            titulo: "A Metamorfose",
-            autor: "Franz Kafka",
-            dataPublicacao: "1997-08-07",
-            avaliacoes: 4.7,
-            editora: "Companhia das Letras",
-            idioma: "Português",
-            paginas: 96,
-            capa: "https://covers.openlibrary.org/b/isbn/9788571646858-L.jpg"
-        },
-        {
-            id: 7,
-            isbn: "978-85-7326-208-7",
-            titulo: "Crime e Castigo",
-            autor: "Fiodor Dostoiévski",
-            dataPublicacao: "2001-01-01",
-            avaliacoes: 4.9,
-            editora: "Editora 34",
-            idioma: "Português",
-            paginas: 568,
-            capa: "https://covers.openlibrary.org/b/isbn/9788573262087-L.jpg"
-        },
-        {
-            id: 8,
-            isbn: "978-85-08-17127-9",
-            titulo: "Quarto de Despejo",
-            autor: "Carolina Maria de Jesus",
-            dataPublicacao: "2015-01-01",
-            avaliacoes: 4.8,
-            editora: "Ática",
-            idioma: "Português",
-            paginas: 200,
-            capa: "https://covers.openlibrary.org/b/isbn/9788508171279-L.jpg"
-        },
-        {
-            id: 9,
-            isbn: "978-85-325-2066-1",
-            titulo: "O Conto da Aia",
-            autor: "Margaret Atwood",
-            dataPublicacao: "2017-06-07",
-            avaliacoes: 4.8,
-            editora: "Rocco",
-            idioma: "Português",
-            paginas: 368,
-            capa: "https://covers.openlibrary.org/b/isbn/9788532520661-L.jpg"
-        }
-    ]
-    
     const livrosEmLoop = [...livros, ...livros]
 </script>
 

@@ -1,16 +1,19 @@
-
 <script setup>
   import { ref, computed } from "vue";
   import Introducao from "./Pages/Introducao.vue";
   import Login from "./Pages/Login.vue";
   import Home from "./Pages/Home.vue";
   import Perfil from "./Pages/Perfilmenu.vue";
+  import Estante from "./Pages/Estante.vue";
+  import MinhaLista from "./Pages/MinhaLista.vue";
 
   const routes = {
     "": Home,
     "login": Login,
     "introducao": Introducao,
-    "perfil": Perfil
+    "perfil": Perfil,
+    "estante": Estante,
+    "lista": MinhaLista,
   }
 
   const currentRoute = ref("");
