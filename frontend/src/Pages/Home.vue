@@ -4,19 +4,18 @@
     import BarraLateral from "../components/BarraLateral.vue";
     import ScrollLivros from "../components/ScrollLivros.vue";
     import Rodape from "../components/Rodape.vue";
-    
+
     defineEmits(['navigate']);
-    
+
     const sidebarAberta = ref(false);
 
     const toggleSidebar = () => {
-    sidebarAberta.value = !sidebarAberta.value;
+        sidebarAberta.value = !sidebarAberta.value;
     };
 
     const fecharSidebar = () => {
-    sidebarAberta.value = false;
+        sidebarAberta.value = false;
     };
-
 </script>
 
 <template>
@@ -28,5 +27,5 @@
         @navigate="$emit('navigate', $event)"
     />
     <ScrollLivros/>
-    <Rodape/>
+    <Rodape currentPage="" @navigate="$emit('navigate', $event)" />
 </template>

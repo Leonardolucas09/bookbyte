@@ -15,18 +15,23 @@ defineProps({
 
 const emit = defineEmits(['toggle', 'close', 'navigate']);
 
-const goToIntroducao = () => {
-    setTimeout(() => {
-        emit('navigate', 'introducao');
-    }, 3200);
-};
-
 const handleToggle = () => {
     emit('toggle');
 };
 
 const handleClose = () => {
     emit('close');
+};
+
+const navegar = (rota) => {
+    emit('navigate', rota);
+    emit('close');
+};
+
+const goToIntroducao = () => {
+    setTimeout(() => {
+        emit('navigate', 'introducao');
+    }, 3200);
 };
 
 const logOutMessage = () => {
@@ -83,8 +88,9 @@ const logOutMessage = () => {
             overlay.remove();
         }, 300);
     }, 3000);
-};
 
+    goToIntroducao();
+};
 </script>
 
 <template>
@@ -119,37 +125,37 @@ const logOutMessage = () => {
         <nav class="slide-nav">
             <ul class="flex flex-col gap-8">
                 <li>
-                    <a href="">
+                    <a href="" @click.prevent="navegar('')">
                         <img :src="inicio" alt="" class="">
                         <p>Início</p>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="" @click.prevent="navegar('estante')">
                         <img :src="minhaEstante" alt="">
                         <p>Minha Estante</p>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="" @click.prevent="navegar('historico')">
                         <img :src="historico" alt="">
                         <p>Histórico</p>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="" @click.prevent="navegar('avaliacoes')">
                         <img :src="avaliacoes" alt="">
                         <p>Avaliações</p>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="" @click.prevent="navegar('perfil')">
                         <img :src="meuPerfil" alt="">
                         <p>Meu Perfil</p>
                     </a>
                 </li>
             </ul>
-            <a @click="goToIntroducao" class="fundo" @click.prevent="logOutMessage">
+            <a @click.prevent="logOutMessage" class="fundo cursor-pointer">
                 <img :src="sair" alt="">
                 <p>Sair</p>
             </a>
