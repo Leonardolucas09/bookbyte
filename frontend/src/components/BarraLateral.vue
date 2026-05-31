@@ -10,10 +10,25 @@ import sair from '../assets/sidebar/sair.png'
 import InputBuscarLivros from './InputBuscarLivros.vue'
 
 defineProps({
-    isOpen: Boolean
+    isOpen: Boolean,
+    isHome: Boolean
 });
 
 const emit = defineEmits(['toggle', 'close', 'navigate']);
+
+const goToHome = () => {
+    emit('navigate', '');
+};
+
+const goToIntroducao = () => {
+    setTimeout(() => {
+        emit('navigate', 'introducao');
+    }, 3200);
+};
+
+const goToPerfil = () => {
+    emit('navigate', 'perfil');
+};
 
 const handleToggle = () => {
     emit('toggle');
@@ -26,12 +41,6 @@ const handleClose = () => {
 const navegar = (rota) => {
     emit('navigate', rota);
     emit('close');
-};
-
-const goToIntroducao = () => {
-    setTimeout(() => {
-        emit('navigate', 'introducao');
-    }, 3200);
 };
 
 const logOutMessage = () => {
@@ -96,15 +105,14 @@ const logOutMessage = () => {
 <template>
     <div v-if="isOpen" class="fixed inset-0 z-40" @click="handleClose">
     </div>
-    <div class="flex justify-start items-center px-8 gap-4">
+    <div class="flex justify-start items-center gap-4">
         <div class="toggle cursor-pointer" @click="handleToggle">
             <svg width="30" height="30" viewBox="0 0 23 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.5 1.5H21.5M1.5 9.2037H21.5M1.5 17.5H21.5" stroke="white" stroke-width="3"
                     stroke-linecap="round" />
             </svg>
         </div>
-
-        <InputBuscarLivros />
+            <InputBuscarLivros v-if="isHome"/>
     </div>
 
     <div class="slide bg-black absolute py-3 px-5 top-0 z-50" @click.stop :class="{ 'slide-open': isOpen }">
@@ -117,15 +125,15 @@ const logOutMessage = () => {
             <div>
                 <img :src="userIcon" class="min-w-12" alt="" />
             </div>
-            <div class="leading-5">
-                <h2 class="text-white font-bold text-lg">Fulano ciclano</h2>
+            <div class="flex flex-col m-0">
+                <h2 class="text-white font-bold text-lg m-0">Fulano ciclano</h2>
                 <p class="text-gray-400 text-base">fulano@gmail.com</p>
             </div>
         </div>
         <nav class="slide-nav">
             <ul class="flex flex-col gap-8">
                 <li>
-                    <a href="" @click.prevent="navegar('')">
+                    <a @click="goToHome" class="cursor-pointer">
                         <img :src="inicio" alt="" class="">
                         <p>Início</p>
                     </a>
@@ -149,13 +157,13 @@ const logOutMessage = () => {
                     </a>
                 </li>
                 <li>
-                    <a href="" @click.prevent="navegar('perfil')">
+                    <a @click="goToPerfil" class="cursor-pointer">
                         <img :src="meuPerfil" alt="">
                         <p>Meu Perfil</p>
                     </a>
                 </li>
             </ul>
-            <a @click.prevent="logOutMessage" class="fundo cursor-pointer">
+            <a @click="goToIntroducao" class="fundo cursor-pointer" @click.prevent="logOutMessage">
                 <img :src="sair" alt="">
                 <p>Sair</p>
             </a>
@@ -165,14 +173,20 @@ const logOutMessage = () => {
 
 <style>
 .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
-    width: 70%;
-    height: 100%;
-    transition: 0.5s ease;
+    width: clamp(280px, 70%, 360px);
+    max-width: 360px;
+    height: 100vh;
+    transition: transform 0.5s ease;
     transform: translateX(-100%);
     overflow: hidden;
+    background: #000;
 }
 .slide-header {
     display: flex;
@@ -203,7 +217,7 @@ const logOutMessage = () => {
 .fundo img {
     width: 24px;
     height: 24px;
-    object-fit: contain;
+    object-fit: contain; 
 }
 
 .slide-open {
