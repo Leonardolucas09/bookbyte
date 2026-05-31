@@ -1,3 +1,11 @@
+<script setup>
+  const emit = defineEmits(['navigate']);
+
+  const goToLogin = () => {
+    emit('navigate', 'login');
+  }
+</script>
+
 <template>
   <div class="cardTelaIntro">
     <div class="containerTelaIntro">
@@ -36,7 +44,7 @@
           Cadastrar-se
 
         </button>
-        <button class="btn-entrar" id="btn-entrar">
+        <button class="btn-entrar" id="btn-entrar" @click="goToLogin">
           <svg class="icone-login" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 
             <path d="M15 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9" stroke="currentColor" stroke-width="2"
