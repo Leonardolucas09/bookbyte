@@ -53,7 +53,7 @@ const livrosFiltrados = computed(() => {
   <div class="text-white px-6 pt-6 pb-32">
     <h1 class="text-2xl font-bold mb-5">Minha Estante</h1>
 
-    <div class="flex gap-2 mb-6 overflow-x-auto pb-1 no-scrollbar">
+    <div class="flex gap-2 mb-6 overflow-x-auto pb-1 no-scrollbar flex-wrap">
       <button
         v-for="filtro in filtros"
         :key="filtro.valor"
