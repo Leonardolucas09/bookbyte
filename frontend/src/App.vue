@@ -3,7 +3,7 @@
   import Introducao from "./Pages/Introducao.vue";
   import Login from "./Pages/Login.vue";
   import Home from "./Pages/Home.vue";
-  import PerfilMenu from "./Pages/Perfilmenu.vue";
+  import PerfilMenu from "./Pages/PerfilMenu.vue";
   import Estante from "./Pages/Estante.vue";
   import MinhaLista from "./Pages/MinhaLista.vue";
 
