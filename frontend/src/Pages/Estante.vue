@@ -43,12 +43,15 @@ const livrosFiltrados = computed(() => {
 
 <template>
   <Cabecalho />
-  <BarraLateral
+  <div class="px-8">
+    <BarraLateral
     :isOpen="sidebarAberta"
+    :isUsablle="true"
     @toggle="toggleSidebar"
     @close="fecharSidebar"
     @navigate="$emit('navigate', $event)"
-  />
+    />
+  </div>
 
   <div class="text-white px-6 pt-6 pb-32">
     <h1 class="text-2xl font-bold mb-5">Minha Estante</h1>
