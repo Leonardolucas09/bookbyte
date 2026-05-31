@@ -26,8 +26,8 @@ const goToIntroducao = () => {
     }, 3200);
 };
 
-const goToPerfil = () => {
-    emit('navigate', 'perfil');
+const goToPerfilMenu = () => {
+    emit('navigate', 'perfilMenu');
 };
 
 const handleToggle = () => {
@@ -157,7 +157,7 @@ const logOutMessage = () => {
                     </a>
                 </li>
                 <li>
-                    <a @click="goToPerfil" class="cursor-pointer">
+                    <a @click="goToPerfilMenu" class="cursor-pointer">
                         <img :src="meuPerfil" alt="">
                         <p>Meu Perfil</p>
                     </a>
