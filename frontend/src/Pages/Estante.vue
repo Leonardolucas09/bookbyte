@@ -78,7 +78,7 @@ const livrosFiltrados = computed(() => {
         <img
           :src="livro.capa"
           :alt="livro.titulo"
-          class="w-16 h-24 rounded-lg object-cover flex-shrink-0"
+          class="w-16 h-24 rounded-lg object-cover shrink-0"
         />
 
         <div class="flex flex-col justify-between flex-1 py-1">
@@ -100,7 +100,9 @@ const livrosFiltrados = computed(() => {
     </div>
   </div>
 
-  <Rodape currentPage="estante" @navigate="$emit('navigate', $event)" />
+  <div class="mt-8">
+    <Rodape currentPage="estante" @navigate="$emit('navigate', $event)" />
+  </div>
 </template>
 
 <style scoped>
