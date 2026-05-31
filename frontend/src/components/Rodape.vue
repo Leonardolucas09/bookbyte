@@ -1,29 +1,27 @@
 <script setup>
-import { ref } from 'vue';
-
-const activeTab = ref('inicio')
+defineProps({ currentPage: { type: String, default: '' } })
+defineEmits(['navigate'])
 </script>
 
 <template>
     <div class="fixed left-0 right-0 bottom-10 px-5">
         <div class="flex justify-center bg-zinc-900 items-center py-2 px-2 rounded-full">
             <ul class="flex text-white w-full justify-around ">
-                <li class="botao w-20" 
-                    :class="{ 'botao-ativo': activeTab === 'inicio' }" 
-                    @click="activeTab = 'inicio'">
+                <li class="botao w-20"
+                    :class="{ 'botao-ativo': currentPage === '' }"
+                    @click="$emit('navigate', '')">
                     <a href="" @click.prevent>
                         <div class="flex flex-col items-center">
                             <svg width="13" height="18" viewBox="0 0 13 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.664062 17.6143C0.298828 17.6143 0 17.3154 0 16.9502V1.69336C0 0.680664 0.697266 0 1.73486 0H10.9155C11.9614 0 12.6504 0.680664 12.6504 1.69336V16.9502C12.6504 17.3154 12.3516 17.6143 11.9863 17.6143C11.6128 17.6143 11.314 17.3154 11.314 16.9502V1.77637C11.314 1.51074 11.1396 1.33643 10.8906 1.33643H1.75977C1.51074 1.33643 1.33643 1.51074 1.33643 1.77637V16.9502C1.33643 17.3154 1.0376 17.6143 0.664062 17.6143ZM2.58984 17.3237C2.43213 17.3237 2.30762 17.1909 2.30762 17.0415V2.58154C2.30762 2.42383 2.43213 2.29932 2.58984 2.29932H10.0688C10.2183 2.29932 10.3428 2.42383 10.3428 2.58154V17.0415C10.3428 17.1909 10.2183 17.3237 10.0688 17.3237H2.58984ZM8.36719 10.6499C8.74072 10.6499 9.03125 10.3511 9.03125 9.98584C9.03125 9.6123 8.74072 9.32178 8.36719 9.32178C8.00195 9.32178 7.70312 9.6123 7.70312 9.98584C7.70312 10.3511 8.00195 10.6499 8.36719 10.6499Z" fill="currentColor"/>
                             </svg>
-
                             Início
                         </div>
                     </a>
                 </li>
-                <li class="botao" 
-                    :class="{ 'botao-ativo': activeTab === 'lista' }" 
-                    @click="activeTab = 'lista'">
+                <li class="botao"
+                    :class="{ 'botao-ativo': currentPage === 'lista' }"
+                    @click="$emit('navigate', 'lista')">
                     <a href="" @click.prevent>
                         <div class="flex flex-col items-center">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,11 +37,10 @@ const activeTab = ref('inicio')
                             Minha Lista
                         </div>
                     </a>
-                    
                 </li>
                 <li class="botao"
-                    :class="{ 'botao-ativo': activeTab === 'estante' }" 
-                    @click="activeTab = 'estante'">
+                    :class="{ 'botao-ativo': currentPage === 'estante' }"
+                    @click="$emit('navigate', 'estante')">
                     <a href="" @click.prevent>
                         <div class="flex flex-col items-center">
                             <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -83,5 +80,4 @@ const activeTab = ref('inicio')
     .botao:not(.botao-ativo):hover {
         background-color: rgba(255, 255, 255, 0.1);
     }
-
 </style>

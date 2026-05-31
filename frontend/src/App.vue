@@ -1,28 +1,32 @@
 <script setup>
-import { ref } from "vue";
-import BarraLateral from "./components/BarraLateral.vue";
-import Cabecalho from "./components/Cabecalho.vue";
-import ScrollLivros from "./components/ScrollLivros.vue";
-import Rodape from "./components/Rodape.vue";
+  import { ref, computed } from "vue";
+  import Introducao from "./Pages/Introducao.vue";
+  import Login from "./Pages/Login.vue";
+  import Home from "./Pages/Home.vue";
+  import PerfilMenu from "./Pages/Perfilmenu.vue";
+  import Estante from "./Pages/Estante.vue";
+  import MinhaLista from "./Pages/MinhaLista.vue";
 
-const sidebarAberta = ref(false);
+  const routes = {
+    "": Home,
+    "login": Login,
+    "introducao": Introducao,
+    "perfilMenu": PerfilMenu,
+    "estante": Estante,
+    "lista": MinhaLista,
+  }
 
-const toggleSidebar = () => {
-  sidebarAberta.value = !sidebarAberta.value;
-};
+  const currentRoute = ref("");
 
-const fecharSidebar = () => {
-  sidebarAberta.value = false;
-};
+  const navigate = (path) => {
+    currentRoute.value = path;
+  }
+
+  const currentView = computed(() => {
+    return routes[currentRoute.value] || Home;
+  });
 </script>
 
 <template>
-  <Cabecalho />
-  <BarraLateral
-    :isOpen="sidebarAberta"
-    @toggle="toggleSidebar"
-    @close="fecharSidebar"
-  />
-  <ScrollLivros/>
-  <Rodape/>
+  <component :is="currentView" @navigate="navigate" />
 </template>
