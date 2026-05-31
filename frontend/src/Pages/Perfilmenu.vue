@@ -15,17 +15,20 @@ defineEmits(['navigate']);
 </script>
 
 <template>
-    <!-- <BarraLateral
-     :isOpen="sidebarAberta"
-        @toggle="toggleSidebar"
-        @close="fecharSidebar"
-        @navigate="$emit('navigate', $event)"
-    /> -->
+    
     <div class="perfil-container">
+        
     <div class="perfil-card">
         <div class="perfil-header">
-        <h1>Perfil</h1>
-    </div>
+            <BarraLateral
+                :is-home="false"
+                :isOpen="sidebarAberta"
+                @toggle="toggleSidebar"
+                @close="fecharSidebar"
+                @navigate="$emit('navigate', $event)"
+            />
+            <h1>Perfil</h1>
+        </div>
         <div class="perfil-informacoes">
             <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="60" cy="60" r="55" fill="#2b2b2b"/>
@@ -37,7 +40,7 @@ defineEmits(['navigate']);
                 <p class="categoriaPerfil">Leitor</p>
             </div>
         </div>
-        <h2>O que você pode fazer:</h2>
+        <h2 class="text-white text-xl font-bold mt-4 mb-2">O que você pode fazer:</h2>
         <div class="menuOpcoes">
             <div class="perfilOpcao">
                 <svg class="marcador" width="25" height="48" viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +94,7 @@ defineEmits(['navigate']);
 
 .perfil-header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     margin-bottom: 20px;
@@ -102,6 +105,10 @@ defineEmits(['navigate']);
 .perfil-card h1{
     margin: 0;
     color: white;
+}
+
+.perfil-header > * {
+    min-width: 0;
 }
 
 .perfil-container{
@@ -130,7 +137,6 @@ defineEmits(['navigate']);
     color: white;
     font-size: 18px;
     font-weight: normal;
-    margin-bottom: 30px;
     padding-left: 4px;
     align-self: flex-start;
     font-family: 'helvetica', sans-serif;
