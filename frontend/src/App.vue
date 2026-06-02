@@ -8,7 +8,9 @@
   import Avaliacoes from "./Pages/Avaliacoes.vue";
   import RecuperarSenha from "./Pages/RecuperarSenha.vue";
 
-  console.log(Cadastro);
+  import PerfilMenu from "./Pages/PerfilMenu.vue";
+  import Estante from "./Pages/Estante.vue";
+  import MinhaLista from "./Pages/MinhaLista.vue";
 
   const routes = {
     "": Home,
