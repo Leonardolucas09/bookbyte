@@ -3,7 +3,13 @@
 
   const goToLogin = () => {
     emit('navigate', 'login');
+    
   }
+
+  const goToCadastro = () => {
+    emit('navigate', 'cadastro');
+  }
+
 </script>
 
 <template>
@@ -26,7 +32,7 @@
       <div class="linhaTelaIntro"></div>
       <p class="text-TelaIntro">sua jornada de leitura<br> começa aqui</p>
       <div class="botoesTelaIntro">
-        <button class="btn-cadastrarse" id="btn-cadastrarse">
+        <button class="btn-cadastrarse" id="btn-cadastrarse" @click="goToCadastro">
 
           <svg class="icone-cadastro" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 
