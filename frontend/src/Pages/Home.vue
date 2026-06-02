@@ -22,7 +22,7 @@
     <Cabecalho />
     <div class="px-8">
         <BarraLateral
-        :isHome="true"
+        :isUsablle="true"
         :isOpen="sidebarAberta"
         @toggle="toggleSidebar"
         @close="fecharSidebar"
