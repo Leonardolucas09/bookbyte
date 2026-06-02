@@ -5,8 +5,9 @@
   import Login from "./Pages/Login.vue";
   import Home from "./Pages/Home.vue";
   import Cadastro from "./Pages/Cadastro.vue";
-
-  console.log(Cadastro);
+  import PerfilMenu from "./Pages/PerfilMenu.vue";
+  import Estante from "./Pages/Estante.vue";
+  import MinhaLista from "./Pages/MinhaLista.vue";
 
   const routes = {
     "": Home,
