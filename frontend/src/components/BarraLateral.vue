@@ -11,7 +11,7 @@ import InputBuscarLivros from './InputBuscarLivros.vue'
 
 defineProps({
     isOpen: Boolean,
-    isHome: Boolean
+    isUsablle: Boolean
 });
 
 const emit = defineEmits(['toggle', 'close', 'navigate']);
@@ -112,7 +112,7 @@ const logOutMessage = () => {
                     stroke-linecap="round" />
             </svg>
         </div>
-            <InputBuscarLivros v-if="isHome"/>
+            <InputBuscarLivros v-if="isUsablle"/>
     </div>
 
     <div class="slide bg-black absolute py-3 px-5 top-0 z-50" @click.stop :class="{ 'slide-open': isOpen }">
