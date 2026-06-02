@@ -5,6 +5,7 @@
   import Login from "./Pages/Login.vue";
   import Home from "./Pages/Home.vue";
   import Cadastro from "./Pages/Cadastro.vue";
+  import RecuperarSenha from "./Pages/RecuperarSenha.vue";
 
   console.log(Cadastro);
 
@@ -13,9 +14,10 @@
     "login": Login,
     "introducao": Introducao,
     "cadastro": Cadastro,
+    "recuperarSenha": RecuperarSenha
   }
 
-  const currentRoute = ref("");
+  const currentRoute = ref("recuperarSenha");
 
   const navigate = (path) => {
     currentRoute.value = path;
