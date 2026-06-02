@@ -1,9 +1,13 @@
 <script setup>
-  const emit = defineEmits(['navigate']);
+const emit = defineEmits(['navigate']);
 
-  const goToHome = () => {
-    emit('navigate', 'home');
-  }
+const goToHome = () => {
+  emit('navigate', 'home');
+}
+
+const goToRecuperarSenha = () => {
+  emit('navigate', 'recuperarSenha');
+}
 </script>
 
 <template>
@@ -20,7 +24,7 @@
               </div>
                 <button class="btn-entrarTelaLogin" @click="goToHome">Entrar</button>
                   <div class="senha-boxTelaLogin">
-                  <a href="#" class="esquecisenha">Esqueci minha senha</a>
+                  <a href="#" class="esquecisenha" @click.prevent="goToRecuperarSenha">Esqueci minha senha</a>
                   </div>
                 </div>
             </div>

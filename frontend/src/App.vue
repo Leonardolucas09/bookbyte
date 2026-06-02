@@ -6,6 +6,7 @@
   import Home from "./Pages/Home.vue";
   import Cadastro from "./Pages/Cadastro.vue";
   import Avaliacoes from "./Pages/Avaliacoes.vue";
+  import RecuperarSenha from "./Pages/RecuperarSenha.vue";
 
   console.log(Cadastro);
 
@@ -15,6 +16,7 @@
     "introducao": Introducao,
     "cadastro": Cadastro,
     "avaliacoes": Avaliacoes,
+    "recuperarSenha": RecuperarSenha,
   }
 
   const currentRoute = ref("");
