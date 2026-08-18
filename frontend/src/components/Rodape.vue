@@ -4,7 +4,7 @@ defineEmits(['navigate'])
 </script>
 
 <template>
-    <div class="fixed left-0 right-0 bottom-10 px-5">
+    <div class="fixed left-0 right-0 bottom-10 mx-3">
         <div class="flex justify-center bg-zinc-900 items-center py-2 px-2 rounded-full">
             <ul class="flex text-white w-full justify-around ">
                 <li class="botao w-20"
