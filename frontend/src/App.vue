@@ -1,24 +1,21 @@
 
 <script setup>
   import { ref, computed } from "vue";
-  import Introducao from "./Pages/Introducao.vue";
+  // import Introducao from "./Pages/Introducao.vue";
   import Login from "./Pages/Login.vue";
-  import Home from "./Pages/Home.vue";
-  import Cadastro from "./Pages/Cadastro.vue";
+  // import Home from "./Pages/Home.vue";
+  // import Cadastro from "./Pages/Cadastro.vue";
   import RecuperarSenha from "./Pages/RecuperarSenha.vue";
-  import PerfilMenu from "./Pages/PerfilMenu.vue";
-  import Estante from "./Pages/Estante.vue";
-  import MinhaLista from "./Pages/MinhaLista.vue";
 
   const routes = {
-    "": Home,
+    // "": Home,
     "login": Login,
-    "introducao": Introducao,
-    "cadastro": Cadastro,
+    // "introducao": Introducao,
+    // "cadastro": Cadastro,
     "recuperarSenha": RecuperarSenha
   }
 
-  const currentRoute = ref("recuperarSenha");
+  const currentRoute = ref("login");
 
   const navigate = (path) => {
     currentRoute.value = path;
@@ -32,3 +29,33 @@
 <template>
   <component :is="currentView" @navigate="navigate" />
 </template>
+
+<style>
+  .lora {
+    font-family: "Lora", serif;
+  }
+
+  .bg-brown {
+    background-color: #785A3E;
+  }
+
+  .bg-cream {
+    background-color: #F7EDD7;
+  }
+
+  .text-brown {
+    color: #785A3E;
+  }
+
+  .text-light-brown {
+    color: #777168;
+  }
+
+  .bg-input {
+    background-color: #FFFEFA;
+  }
+
+  .stroke-input {
+    border: 1px solid #785A3E;
+  }
+</style>
