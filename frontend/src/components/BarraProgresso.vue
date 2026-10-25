@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { computed } from 'vue'
 
 const props = defineProps({
@@ -6,21 +6,30 @@ const props = defineProps({
   totalPaginas: { type: Number, required: true },
 })
 
-const porcentagem = computed(() =>
-  Math.round((props.paginasLidas / props.totalPaginas) * 100)
-)
+const porcentagem = computed(() => {
+  if (props.totalPaginas <= 0) return 0
+  return Math.min(100, Math.max(0, Math.round((props.paginasLidas / props.totalPaginas) * 100)))
+})
 </script>
 
 <template>
-  <div>
-    <div class="w-full bg-zinc-700 rounded-full h-1.5 mb-1">
+  <div class="flex w-full flex-col gap-2">
+    <div
+      class="h-1.5 w-full overflow-hidden rounded-full bg-[#DEDAD2]"
+      role="progressbar"
+      :aria-valuenow="porcentagem"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      :aria-label="`Progresso da leitura: ${porcentagem}%`"
+    >
       <div
-        class="bg-[#27efb2] h-1.5 rounded-full transition-all"
-        :style="{ width: porcentagem + '%' }"
+        class="h-full rounded-full bg-[#785A3E] transition-all"
+        :style="{ width: `${porcentagem}%` }"
       />
     </div>
-    <p class="text-zinc-400 text-xs">
-      {{ porcentagem }}% · {{ props.paginasLidas }}/{{ props.totalPaginas }} páginas
+
+    <p class="text-base text-[#81796F]">
+      {{ paginasLidas }} de {{ totalPaginas }} páginas
     </p>
   </div>
 </template>

@@ -1,36 +1,37 @@
-<script setup>
-    import { ref } from "vue";
-    import Cabecalho from "../components/Cabecalho.vue";
-    // import Cabecalho from "../components/Cabecalho.vue";
-    // import BarraLateral from "../components/BarraLateral.vue";
-    // import ScrollLivros from "../components/ScrollLivros.vue";
-    // import Rodape from "../components/Rodape.vue";
+﻿<script setup>
+import { computed } from 'vue';
+import Cabecalho from '../components/Cabecalho.vue';
+import CardLivro from '../components/CardLivro.vue';
+import { livros } from '../data/livros.js';
+import CardHorizontal from '../components/CardHorizontal.vue';
 
-    defineEmits(['navigate']);
+const livrosLendo = computed(() =>
+    [...livros]
+        .filter((livro) => livro.statusLeitura === "Lendo")
+        .sort((a, b) => a.titulo.localeCompare(b.titulo, 'pt-BR'))
+);
 
-    // const sidebarAberta = ref(false);
+const livroMenosLido = computed(() =>
+    [...livrosLendo.value].sort((a, b) => a.paginasLidas - b.paginasLidas)[0]
+);
 
-    // const toggleSidebar = () => {
-    //     sidebarAberta.value = !sidebarAberta.value;
-    // };
+const outrosLivrosLendo = computed(() =>
+    livrosLendo.value.filter((livro) => livro.id !== livroMenosLido.value?.id)
+);
 
-    // const fecharSidebar = () => {
-    //     sidebarAberta.value = false;
-    // };
+defineEmits(['navigate']);
 </script>
 
 <template>
-    <Cabecalho/>
-    <!-- <Cabecalho />
-    <div class="px-8">
-        <BarraLateral
-        :isUsablle="true"
-        :isOpen="sidebarAberta"
-        @toggle="toggleSidebar"
-        @close="fecharSidebar"
-        @navigate="$emit('navigate', $event)"
+    <Cabecalho />
+    <main class="flex flex-wrap p-10 gap-3 w-fit justify-between">
+        <CardLivro v-for="livro in outrosLivrosLendo" :key="livro.id" :livro="livro" />
+        <CardHorizontal
+            v-if="livroMenosLido"
+            :key="livroMenosLido.id"
+            :livro="livroMenosLido"
+            class="basis-full"
         />
-    </div>
-    <ScrollLivros/>
-    <Rodape currentPage="" @navigate="$emit('navigate', $event)" /> -->
+    </main>
 </template>
+
