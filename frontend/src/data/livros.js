@@ -1,4 +1,4 @@
-export const livros = [
+﻿export const livros = [
   {
     id: 1,
     isbn: '978-85-828-5119-7',
@@ -9,18 +9,22 @@ export const livros = [
     editora: 'Penguin-Companhia das Letras',
     idioma: 'Português',
     paginas: 392,
+    paginasLidas: 184,
+    statusLeitura: 'Quero Ler',
     capa: 'https://covers.openlibrary.org/b/isbn/9788582851197-L.jpg',
   },
   {
     id: 2,
     isbn: '978-85-220-3145-0',
-    titulo: 'O Pequeno Príncipe',
+    titulo: 'O Pequeno Prí­ncipe',
     autor: 'Antoine de Saint-Exupéry',
     dataPublicacao: '2015-05-01',
     avaliacao: 4.9,
     editora: 'Agir',
     idioma: 'Português',
     paginas: 96,
+    paginasLidas: 65,
+    statusLeitura: 'Lendo',
     capa: 'https://covers.openlibrary.org/b/isbn/9788522031450-L.jpg',
   },
   {
@@ -33,18 +37,22 @@ export const livros = [
     editora: 'Martins Fontes',
     idioma: 'Português',
     paginas: 1211,
+    paginasLidas: 1111,
+    statusLeitura: 'Lendo',
     capa: 'https://covers.openlibrary.org/b/isbn/9788533613409-L.jpg',
   },
   {
     id: 4,
     isbn: '978-85-03-00949-2',
-    titulo: 'O Sol É Para Todos',
+    titulo: 'O Sol é Para Todos',
     autor: 'Harper Lee',
     dataPublicacao: '2006-10-10',
     avaliacao: 4.8,
-    editora: 'José Olympio',
+    editora: 'João Olympio',
     idioma: 'Português',
     paginas: 349,
+    paginasLidas: 87,
+    statusLeitura: 'Lendo',
     capa: 'https://covers.openlibrary.org/b/isbn/9788503009492-L.jpg',
   },
   {
@@ -57,6 +65,8 @@ export const livros = [
     editora: 'Aleph',
     idioma: 'Português',
     paginas: 544,
+    paginasLidas: 278,
+    statusLeitura: 'Lendo',
     capa: 'https://covers.openlibrary.org/b/isbn/9788576571018-L.jpg',
   },
   {
@@ -69,6 +79,8 @@ export const livros = [
     editora: 'Companhia das Letras',
     idioma: 'Português',
     paginas: 96,
+    paginasLidas: 50,
+    statusLeitura: 'Abandonei',
     capa: 'https://covers.openlibrary.org/b/isbn/9788571646858-L.jpg',
   },
   {
@@ -81,6 +93,8 @@ export const livros = [
     editora: 'Editora 34',
     idioma: 'Português',
     paginas: 568,
+    paginasLidas: 184,
+    statusLeitura: 'Abandonei',
     capa: 'https://covers.openlibrary.org/b/isbn/9788573262087-L.jpg',
   },
   {
@@ -93,6 +107,8 @@ export const livros = [
     editora: 'Ática',
     idioma: 'Português',
     paginas: 200,
+    paginasLidas: 200,
+    statusLeitura: 'Lido',
     capa: 'https://covers.openlibrary.org/b/isbn/9788508171279-L.jpg',
   },
   {
@@ -105,6 +121,9 @@ export const livros = [
     editora: 'Rocco',
     idioma: 'Português',
     paginas: 368,
+    paginasLidas: 47,
+    statusLeitura: 'Lendo',
     capa: 'https://covers.openlibrary.org/b/isbn/9788532520661-L.jpg',
   },
 ]
+
