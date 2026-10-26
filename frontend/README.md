@@ -215,10 +215,10 @@ O repositório Git é a **única fonte de verdade**. Nada de código circulando 
 | Branch | Uso |
 |---|---|
 | `production` | Código estável, publicado em produção |
-| `feature/<descricao-curta>` | Novas funcionalidades |
-| `fix/<descricao-curta>` | Correções de bugs |
-| `docs/<descricao-curta>` | Documentação |
-| `chore/<descricao-curta>` | Configuração, dependências, ajustes |
+| `feat-xxxx-<descricao-curta>` | Novas funcionalidades |
+| `fix-xxxx-<descricao-curta>` | Correções de bugs |
+| `docs-xxxx-<descricao-curta>` | Documentação |
+| `chore-xxxx-<descricao-curta>` | Configuração, dependências, ajustes |
 
 Exemplos: `feature/busca-open-library`, `fix/filtro-status`, `docs/readme`.
 
