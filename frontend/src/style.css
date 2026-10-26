@@ -1,6 +1,14 @@
 @import 'tailwindcss';
 
 @theme {
+    --color-brown: #785A3E;
+    --color-light-brown: #777168;
+    --color-cream: #F7EDD7;
+    --color-input: #FFFEFA;
+    --color-sand: #EDE4D8;
+
+    --font-lora: "Lora", serif;
+
     --animate-scroll: scroll 280s linear infinite;
 
     @keyframes scroll {
@@ -14,7 +22,7 @@ body {
   padding: 0;
   box-sizing: border-box;
 
-  background-color:#FFFEFA !important;
+  background-color: var(--color-input);
 
   font-family: "Inter", sans-serif;
 }

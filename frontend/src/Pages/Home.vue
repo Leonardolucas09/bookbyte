@@ -1,34 +1,16 @@
 <script setup>
-    import { ref } from "vue";
-    import Cabecalho from "../components/Cabecalho.vue";
-    import BarraLateral from "../components/BarraLateral.vue";
-    import ScrollLivros from "../components/ScrollLivros.vue";
-    import Rodape from "../components/Rodape.vue";
+import BarraLateral from "../components/BarraLateral.vue";
+import ScrollLivros from "../components/ScrollLivros.vue";
 
-    defineEmits(['navigate']);
-
-    const sidebarAberta = ref(false);
-
-    const toggleSidebar = () => {
-        sidebarAberta.value = !sidebarAberta.value;
-    };
-
-    const fecharSidebar = () => {
-        sidebarAberta.value = false;
-    };
+defineEmits(["navigate"]);
 </script>
 
 <template>
-    <Cabecalho />
-    <div class="px-8">
-        <BarraLateral
-        :isUsablle="true"
-        :isOpen="sidebarAberta"
-        @toggle="toggleSidebar"
-        @close="fecharSidebar"
+    <BarraLateral
+        pagina-atual=""
         @navigate="$emit('navigate', $event)"
-        />
-    </div>
-    <ScrollLivros/>
-    <Rodape currentPage="" @navigate="$emit('navigate', $event)" />
+    />
+    <main class="ml-72 min-h-screen px-10 py-8">
+        <ScrollLivros />
+    </main>
 </template>
