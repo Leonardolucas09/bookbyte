@@ -1,19 +1,20 @@
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
-const emit = defineEmits(['navigate']);
+const router = useRouter();
 
 const linkEnviado = ref(false);
 
 const enviarLink = () => {
-  setTimeout(() => {
-    linkEnviado.value = true;
-  }, 1000);
-}
+    setTimeout(() => {
+        linkEnviado.value = true;
+    }, 1000);
+};
 
 const goToLogin = () => {
-  emit('navigate', 'login');
-}
+    router.push("/login");
+};
 </script>
 
 <template>

@@ -1,13 +1,15 @@
 <script setup>
-const emit = defineEmits(['navigate']);
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const goToHome = () => {
-  emit('navigate', 'home');
-}
+    router.push("/");
+};
 
 const goToLogin = () => {
-  emit('navigate', 'login');
-}
+    router.push("/login");
+};
 </script>
 
 <template>
