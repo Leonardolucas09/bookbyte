@@ -7,7 +7,7 @@ import IconeConfiguracoes from "./icones/IconeConfiguracoes.vue";
 
 const menuItems = [
     { nome: "Estante", rota: "/estante", icone: IconeEstante },
-    { nome: "Descobrir", rota: "/", icone: IconeDescobrir },
+    { nome: "Descobrir", rota: "/descobrir", icone: IconeDescobrir },
     { nome: "Notas de leitura", rota: "/notas", icone: IconeNotas },
 ];
 </script>
