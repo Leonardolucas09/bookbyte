@@ -1,21 +1,18 @@
 <script setup>
-import LogoBookByte from '../components/LogoBookByte.vue';
-import XButton from '../components/X-Button.vue';
-import XInput from '../components/X-Input.vue';
+import LogoBookByte from "../components/LogoBookByte.vue";
+import XButton from "../components/X-Button.vue";
+import XInput from "../components/X-Input.vue";
+import { useRouter } from "vue-router";
 
-  const emit = defineEmits(['navigate']);
+const router = useRouter();
 
-  const goToHome = () => {
-    emit('navigate', 'home');
-  }
+const goToCriarConta = () => {
+    router.push("/cadastro");
+};
 
-  const goToCriarConta = () => {
-    emit('navigate', 'cadastro');
-  }
-
-  const goToRecuperarSenha = () => {
-  emit('navigate', 'recuperarSenha');
-  }
+const goToRecuperarSenha = () => {
+    router.push("/recuperar-senha");
+};
 
 </script>
 
@@ -159,7 +156,7 @@ import XInput from '../components/X-Input.vue';
           text="Entrar"
           color="#785A3E"
           type="submit"
-          
+
         />
       </form>
       <div class="flex w-full max-w-md items-center justify-center gap-2 py-5">

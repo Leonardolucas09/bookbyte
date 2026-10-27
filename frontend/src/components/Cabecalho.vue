@@ -27,7 +27,7 @@ const limparBusca = () => {
 </script>
 
 <template>
-    <header class="flex flex-col gap-3 bg-[#FFFEFA] px-6 py-4 md:flex-row md:items-center md:gap-6 border-b-2 border-b-gray-300">
+    <header class="flex flex-col gap-3 bg-[#FFFEFA] px-6 py-4 md:flex-row md:items-center md:gap-6 border-b border-sand">
         <div class="flex w-full items-center justify-between md:w-auto md:justify-start">
             <LogoBookByte />
             <span class="ml-6 hidden text-light-brown md:inline">Um capítulo de cada vez.</span>
