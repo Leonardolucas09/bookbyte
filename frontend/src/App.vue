@@ -14,7 +14,7 @@ const routes = {
     "recuperarSenha": RecuperarSenha,
 };
 
-const currentRoute = ref("login");
+const currentRoute = ref("");
 
 const navigate = (path) => {
     currentRoute.value = path;
