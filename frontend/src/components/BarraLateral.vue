@@ -1,9 +1,9 @@
 <script setup>
-import IconeEstante from "./icones/IconeEstante.vue";
-import IconeDescobrir from "./icones/IconeDescobrir.vue";
-import IconeNotas from "./icones/IconeNotas.vue";
-import IconeCafe from "./icones/IconeCafe.vue";
-import IconeConfiguracoes from "./icones/IconeConfiguracoes.vue";
+import IconeEstante from "./icons/IconeEstante.vue";
+import IconeDescobrir from "./icons/IconeDescobrir.vue";
+import IconeNotas from "./icons/IconeNotas.vue";
+import IconeCafe from "./icons/IconeCafe.vue";
+import IconeConfiguracoes from "./icons/IconeConfiguracoes.vue";
 
 const menuItems = [
     { nome: "Estante", rota: "/estante", icone: IconeEstante },
