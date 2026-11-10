@@ -1,6 +1,13 @@
 ﻿<script setup>
 import StatusLeitura from './StatusLeitura.vue';
 import BarraProgresso from './BarraProgresso.vue';
+import { atualizarStatus } from '../services/estante.js';
+
+const statusDisponiveis = ['Quero Ler', 'Lendo', 'Lido', 'Abandonei'];
+
+function mudarStatus(event) {
+    atualizarStatus(props.livro.id, event.target.value);
+}
 
 const props = defineProps({
     livro: { type: Object, required: true },
@@ -8,8 +15,8 @@ const props = defineProps({
 </script>
 
 <template>
-    <a class="flex flex-col gap-2">
-        <div class="flex w-fit rounded-md bg-[#EEE9DF] px-8 py-3">
+    <article class="flex flex-col gap-2 w-48">
+        <div class="flex  w-fit rounded-md bg-[#EEE9DF] px-8 py-3">
             <img
                 :src="livro.capa"
                 :alt="`Capa de ${livro.titulo}`"
@@ -30,11 +37,24 @@ const props = defineProps({
                     {{ Math.round((livro.paginasLidas / livro.paginas) * 100) }}%
                 </span>
             </div>
+            <label class="flex flex-col gap-1 text-sm text-light-brown">
+                Alterar status
+                <select
+                    :value="livro.statusLeitura"
+                    class="rounded-md border border-[#D8CBBB] bg-white px-2 py-1 text-[#765B3F]"
+                    :aria-label="`Status de leitura de ${livro.titulo}`"
+                    @change="mudarStatus"
+                >
+                    <option v-for="status in statusDisponiveis" :key="status" :value="status">
+                        {{ status }}
+                    </option>
+                </select>
+            </label>
             <BarraProgresso
                 v-if="livro.statusLeitura === 'Lendo'"
                 :paginas-lidas="livro.paginasLidas"
                 :total-paginas="livro.paginas"
             />
         </div>
-    </a>
+    </article>
 </template>
