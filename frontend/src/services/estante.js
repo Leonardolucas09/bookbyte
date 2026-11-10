@@ -16,6 +16,14 @@ export function adicionarNaEstante(livro) {
     localStorage.setItem("estante", JSON.stringify(estante.value));
 }
 
+export function atualizarStatus(id, statusLeitura) {
+    const livro = estante.value.find((item) => item.id === id);
+    if (!livro) return;
+
+    livro.statusLeitura = statusLeitura;
+    localStorage.setItem("estante", JSON.stringify(estante.value));
+}
+
 export function estaNaEstante(livro) {
     return estante.value.some((item) => item.titulo === livro.titulo && item.autor === livro.autor);
 }
