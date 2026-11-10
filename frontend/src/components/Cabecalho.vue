@@ -1,24 +1,41 @@
 ﻿<script setup>
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import LogoBookByte from './LogoBookByte.vue';
 import Busca from './icons/Busca.vue';
 import Fechar from './icons/Fechar.vue';
-import { livros } from '../data/livros.js';
+import { buscarLivros } from '../services/api.js';
+import { adicionarNaEstante, estaNaEstante } from '../services/estante.js';
 
 const busca = ref('');
 const mostrarSugestoes = ref(false);
+const resultados = ref([]);
+const carregando = ref(false);
+const erro = ref('');
 
-const resultados = computed(() => {
-    const termo = busca.value.trim().toLocaleLowerCase('pt-BR');
-    if (!termo) return [];
+// Roda quando a pessoa aperta Enter no campo de busca
+async function pesquisar() {
+    mostrarSugestoes.value = true;
+    resultados.value = [];
+    erro.value = '';
 
-    return livros.filter((livro) =>
-        `${livro.titulo} ${livro.autor}`.toLocaleLowerCase('pt-BR').includes(termo)
-    );
-});
+    if (busca.value.trim().length < 2) {
+        erro.value = 'Digite pelo menos 2 letras.';
+        return;
+    }
 
-const sugestoes = computed(() => resultados.value.slice(0, 2));
-const formatarAno = (data) => new Date(`${data}T00:00:00`).getFullYear();
+    carregando.value = true;
+    try {
+        const dados = await buscarLivros(busca.value.trim());
+        if (dados.erro) {
+            erro.value = dados.erro;
+        } else {
+            resultados.value = dados.livros.slice(0, 5); // mostra só os 5 primeiros
+        }
+    } catch {
+        erro.value = 'Não foi possível buscar. A API está rodando?';
+    }
+    carregando.value = false;
+}
 
 const limparBusca = () => {
     busca.value = '';
@@ -48,8 +65,7 @@ const limparBusca = () => {
                     aria-autocomplete="list"
                     :aria-expanded="mostrarSugestoes && busca.trim().length > 0"
                     aria-controls="sugestoes-livros"
-                    @focus="mostrarSugestoes = true"
-                    @input="mostrarSugestoes = true"
+                    @keydown.enter="pesquisar"
                     @keydown.esc="limparBusca"
                 />
                 <button
@@ -69,33 +85,34 @@ const limparBusca = () => {
                 class="absolute left-0 top-[calc(100%+8px)] z-20 flex w-full flex-col gap-3 rounded-[10px] border border-[#E1DCD2] bg-[#FFFEFA] p-4 shadow-[0_12px_32px_rgba(48,46,43,0.094)]"
                 role="listbox"
             >
-                <div class="flex items-center justify-between text-[11px] font-medium uppercase tracking-wide text-[#777168]">
-                    <span>Sugestões de livros</span>
-                    <span class="normal-case tracking-normal">{{ resultados.length }} resultado{{ resultados.length === 1 ? '' : 's' }}</span>
-                </div>
+                <span class="text-[11px] font-medium uppercase tracking-wide text-[#777168]">Sugestões de livros</span>
 
-                <template v-if="sugestoes.length">
+                <p v-if="carregando" class="py-3 text-sm text-[#777168]">Buscando...</p>
+
+                <p v-else-if="erro" class="py-3 text-sm text-[#8A4E48]">{{ erro }}</p>
+
+                <p v-else-if="resultados.length === 0" class="py-3 text-sm text-[#777168]">Nenhum livro encontrado.</p>
+
+                <div
+                    v-for="livro in resultados"
+                    :key="livro.titulo + livro.autor"
+                    class="flex items-center gap-4 rounded-lg p-2 hover:bg-[#F5F3EF]"
+                >
+                    <img :src="livro.capa" :alt="`Capa de ${livro.titulo}`" class="h-18 w-13 shrink-0 rounded object-cover shadow-sm" />
+                    <span class="flex min-w-0 flex-1 flex-col gap-1">
+                        <span class="truncate text-sm font-medium text-[#302E2B]">{{ livro.titulo }}</span>
+                        <span class="truncate text-[13px] text-[#777168]">{{ livro.autor }} · {{ livro.ano }}</span>
+                    </span>
+                    <span v-if="estaNaEstante(livro)" class="text-sm text-[#3D6945]">Na estante</span>
                     <button
-                        v-for="livro in sugestoes"
-                        :key="livro.id"
+                        v-else
                         type="button"
-                        class="flex w-full items-center gap-4 rounded-lg p-2 text-left transition-colors hover:bg-[#F5F3EF]"
-                        role="option"
-                        @click="busca = livro.titulo; mostrarSugestoes = false"
+                        class="rounded-lg border-2 border-[#E1DCD2] px-3 py-1 text-sm font-semibold text-brown"
+                        @click="adicionarNaEstante(livro)"
                     >
-                        <img :src="livro.capa" :alt="`Capa de ${livro.titulo}`" class="h-18 w-13 shrink-0 rounded object-cover shadow-sm" />
-                        <span class="flex min-w-0 flex-1 flex-col gap-1">
-                            <span class="truncate text-sm font-medium text-[#302E2B]">{{ livro.titulo }}</span>
-                            <span class="truncate text-[13px] text-[#777168]">{{ livro.autor }} · {{ formatarAno(livro.dataPublicacao) }} · {{ livro.paginas }} páginas</span>
-                        </span>
-                        <span class="text-lg text-[#8B887F]" aria-hidden="true">↗</span>
+                        + Adicionar
                     </button>
-                    <button type="button" class="pt-1 text-left text-sm font-medium text-[#805A3B] hover:underline" @click="mostrarSugestoes = false">
-                        Ver todos os resultados para “{{ busca.trim() }}” →
-                    </button>
-                </template>
-
-                <p v-else class="py-3 text-sm text-[#777168]">Nenhum livro encontrado para “{{ busca.trim() }}”.</p>
+                </div>
             </div>
         </div>
 
