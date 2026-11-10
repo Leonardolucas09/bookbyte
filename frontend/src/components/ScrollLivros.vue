@@ -1,6 +1,6 @@
 <script setup>
     import { useTemplateRef } from 'vue';
-    import { livros } from '../data/livros.js'
+    import { estante } from '../services/estante.js'
 
     const carrossel = useTemplateRef('carrossel')
 
@@ -10,7 +10,7 @@
         })
     }
 
-    const livrosEmLoop = [...livros, ...livros]
+    const livrosEmLoop = [...estante.value, ...estante.value]
 </script>
 
 <template>
