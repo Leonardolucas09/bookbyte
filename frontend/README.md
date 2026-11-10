@@ -121,7 +121,8 @@ Detalhes da separação em camadas estão no documento *Arquitetura em Camadas* 
 ```
 bookbyte/
 ├── frontend/     # SPA em Vue.js + Vite + Tailwind
-└── ...           # demais módulos (back-end, scripts de banco) conforme evolução
+├── backend/      # API REST em Node.js + Express (integração com a Open Library)
+└── ...           # demais módulos (scripts de banco) conforme evolução
 ```
 
 > Ajuste esta seção conforme a estrutura final de pastas do repositório.
@@ -160,6 +161,16 @@ Scripts usuais de um projeto Vite:
 | `npm run dev` | Servidor de desenvolvimento |
 | `npm run build` | Build de produção |
 | `npm run preview` | Pré-visualização do build |
+
+### 2.1 Back-end (API)
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+A API sobe em `http://localhost:3000`. Endpoints, formato das respostas e tratamento de falhas da Open Library estão no [README do back-end](../backend/README.md).
 
 ### 3. Banco de dados
 
