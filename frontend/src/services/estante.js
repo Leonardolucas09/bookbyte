@@ -1,29 +1,24 @@
 import { ref } from "vue";
+import { pegarEstante, salvarNaEstante, mudarStatus } from "./api.js";
 
-// Lista de livros da estante.
-// Fica salva no navegador (localStorage) porque ainda não temos banco de dados.
-export const estante = ref(JSON.parse(localStorage.getItem("estante")) || []);
+// Livros da estante do usuário logado. Ficam salvos no banco, pela API.
+export const estante = ref([]);
 
-export function adicionarNaEstante(livro) {
-    const novoLivro = {
-        ...livro,
-        id: Date.now(),
-        statusLeitura: "Quero Ler",
-        paginasLidas: 0,
-    };
-
-    estante.value.push(novoLivro);
-    localStorage.setItem("estante", JSON.stringify(estante.value));
+export async function carregarEstante() {
+    estante.value = await pegarEstante();
 }
 
-export function atualizarStatus(id, statusLeitura) {
-    const livro = estante.value.find((item) => item.id === id);
-    if (!livro) return;
+export async function adicionarNaEstante(livro) {
+    const novoLivro = await salvarNaEstante(livro);
+    estante.value.push(novoLivro);
+}
 
-    livro.statusLeitura = statusLeitura;
-    localStorage.setItem("estante", JSON.stringify(estante.value));
+export async function atualizarStatus(id, statusLeitura) {
+    const livroAtualizado = await mudarStatus(id, statusLeitura);
+    const posicao = estante.value.findIndex(item => item.id === id);
+    estante.value[posicao] = livroAtualizado;
 }
 
 export function estaNaEstante(livro) {
-    return estante.value.some((item) => item.titulo === livro.titulo && item.autor === livro.autor);
+    return estante.value.some(item => item.titulo === livro.titulo && item.autor === livro.autor);
 }

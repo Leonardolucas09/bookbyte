@@ -1,10 +1,36 @@
 <script setup>
+import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { cadastrar } from "../services/api.js";
 
 const router = useRouter();
 
-const goToHome = () => {
-    router.push("/");
+const nomeUsuario = ref("");
+const email = ref("");
+const senha = ref("");
+const confirmarSenha = ref("");
+const erro = ref("");
+
+const criarConta = async () => {
+    erro.value = "";
+
+    if (!nomeUsuario.value || !email.value || !senha.value || !confirmarSenha.value) {
+        erro.value = "Preencha todos os campos.";
+        return;
+    }
+    if (senha.value !== confirmarSenha.value) {
+        erro.value = "As senhas não são iguais.";
+        return;
+    }
+
+    try {
+        await cadastrar(nomeUsuario.value, email.value, senha.value);
+        // Conta criada: vai para o login (especificação de casos de uso)
+        router.push("/login");
+    }
+    catch (e) {
+        erro.value = e.message;
+    }
 };
 
 const goToLogin = () => {
@@ -22,53 +48,43 @@ const goToLogin = () => {
           Cadastrar
         </div>
 
-        <div class="formularioTelaCadastro">
+        <form class="formularioTelaCadastro" @submit.prevent="criarConta">
 
           <input
-            type="text"
-            placeholder="Digite seu nome completo"
-            class="inputTelaCadastro"
-          />
-
-          <input
+            v-model="nomeUsuario"
             type="text"
             placeholder="Digite um nome de usuário"
             class="inputTelaCadastro"
           />
 
           <input
+            v-model="email"
             type="email"
             placeholder="Digite seu e-mail"
             class="inputTelaCadastro"
           />
 
           <input
-            type="date"
-            placeholder="Data de nascimento"
-            class="inputTelaCadastro"
-          />
-
-          <input
-            type="tel"
-            placeholder="(00) 00000-0000"
-            class="inputTelaCadastro"
-          />
-
-          <input
+            v-model="senha"
             type="password"
             placeholder="Crie uma senha"
             class="inputTelaCadastro"
           />
 
           <input
+            v-model="confirmarSenha"
             type="password"
             placeholder="Confirme sua senha"
             class="inputTelaCadastro"
           />
 
+          <p v-if="erro" class="erroCadastro">
+            {{ erro }}
+          </p>
+
           <button
+            type="submit"
             class="btnCadastro"
-            @click="goToHome"
           >
             Cadastrar
           </button>
@@ -83,7 +99,7 @@ const goToLogin = () => {
             </a>
           </div>
 
-        </div>
+        </form>
 
       </div>
 
@@ -182,6 +198,13 @@ const goToLogin = () => {
 .btnCadastro:hover{
   box-shadow: 0 0 10px rgba(39,239,178,0.5);
   transform: scale(1.03);
+}
+
+.erroCadastro{
+  width: 240px;
+  color: #ff8a80;
+  font-size: 14px;
+  text-align: center;
 }
 
 .login-boxCadastro{
