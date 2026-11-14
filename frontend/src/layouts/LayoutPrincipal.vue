@@ -1,6 +1,11 @@
 <script setup>
+import { onMounted } from "vue";
 import Cabecalho from "../components/Cabecalho.vue";
 import BarraLateral from "../components/BarraLateral.vue";
+import { carregarEstante } from "../services/estante.js";
+
+// Quando abre o site logado, busca a estante do usuário no banco
+onMounted(carregarEstante);
 </script>
 
 <template>

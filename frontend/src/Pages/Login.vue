@@ -2,9 +2,30 @@
 import LogoBookByte from "../components/LogoBookByte.vue";
 import XButton from "../components/X-Button.vue";
 import XInput from "../components/X-Input.vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { entrar } from "../services/api.js";
 
 const router = useRouter();
+
+const email = ref("");
+const password = ref("");
+const checkbox = ref(true);
+const erro = ref("");
+
+const fazerLogin = async () => {
+    erro.value = "";
+    try {
+        const dados = await entrar(email.value, password.value);
+        // Guarda o token e o usuário no navegador para ele continuar logado
+        localStorage.setItem("token", dados.token);
+        localStorage.setItem("usuario", JSON.stringify(dados.usuario));
+        router.push("/estante");
+    }
+    catch (e) {
+        erro.value = e.message;
+    }
+};
 
 const goToCriarConta = () => {
     router.push("/cadastro");
@@ -127,14 +148,14 @@ const goToRecuperarSenha = () => {
       <h3 class="lora text-4xl text-olive-900">Bom ter você de volta.</h3>
       <span class="text-sm text-light-brown">Entre para continuar suas histórias de onde parou.</span>
 
-      <form class="flex w-full max-w-md flex-col gap-4">
+      <form class="flex w-full max-w-md flex-col gap-4" @submit.prevent="fazerLogin">
         <XInput
           v-model="email"
-          label="E-mail"
+          label="E-mail ou nome de usuário"
           name="email"
-          type="email"
-          placeholder="Digite seu e-mail"
-          autocomplete="email"
+          type="text"
+          placeholder="Digite seu e-mail ou nome de usuário"
+          autocomplete="username"
         />
         <XInput
           v-model="password"
@@ -148,15 +169,16 @@ const goToRecuperarSenha = () => {
           <XInput
           v-model="checkbox"
           label="Manter conectado"
+          name="manterConectado"
           type="checkbox"
           />
           <a href="#" @click.prevent="goToRecuperarSenha" class="text-sm text-brown cursor-pointer">Esqueci minha senha</a>
         </div>
+        <p v-if="erro" class="text-sm text-[#8A4E48]">{{ erro }}</p>
         <XButton
           text="Entrar"
           color="#785A3E"
           type="submit"
-
         />
       </form>
       <div class="flex w-full max-w-md items-center justify-center gap-2 py-5">

@@ -5,6 +5,7 @@ import Descobrir from "../Pages/Descobrir.vue";
 import NotasLeitura from "../Pages/NotasLeitura.vue";
 import Configuracoes from "../Pages/Configuracoes.vue";
 import Login from "../Pages/Login.vue";
+import Cadastro from "../Pages/Cadastro.vue";
 import RecuperarSenha from "../Pages/RecuperarSenha.vue";
 
 const routes = [
@@ -20,11 +21,25 @@ const routes = [
         ],
     },
     { path: "/login", name: "login", component: Login },
+    { path: "/cadastro", name: "cadastro", component: Cadastro },
     { path: "/recuperar-senha", name: "recuperarSenha", component: RecuperarSenha },
     { path: "/:pathMatch(.*)*", redirect: "/" },
 ];
 
-export default createRouter({
+const router = createRouter({
     history: createWebHistory(),
     routes,
 });
+
+// Telas que podem ser abertas sem estar logado
+const telasPublicas = ["login", "cadastro", "recuperarSenha"];
+
+// Antes de abrir qualquer tela: se não está logado, manda para o login
+router.beforeEach((destino) => {
+    const estaLogado = localStorage.getItem("token");
+    if (!estaLogado && !telasPublicas.includes(destino.name)) {
+        return "/login";
+    }
+});
+
+export default router;
