@@ -10,6 +10,7 @@ async function buscarItens(usuarioId, itemId) {
             livro.titulo, livro.autor, livro.editora, livro.ano, livro.paginas, livro.isbn, livro.capa,
             item_estante.status_leitura AS statusLeitura,
             item_estante.paginas_lidas AS paginasLidas,
+            item_estante.descricao_leitura AS descricaoLeitura,
             item_estante.atualizado_em AS atualizadoEm
         FROM item_estante
         JOIN livro ON livro.id = item_estante.livro_id
@@ -90,9 +91,48 @@ export async function atualizarStatus(req, res) {
         [statusLeitura, req.params.id, req.usuarioId],
     );
 
-    if (resultado.affectedRows === 0) {
+    const [itens] = await banco.query(
+        "SELECT id FROM item_estante WHERE id = ? AND usuario_id = ?",
+        [req.params.id, req.usuarioId],
+    );
+    if (itens.length === 0) {
         return res.status(404).json({ erro: "Livro não encontrado na sua estante." });
     }
+
+    const [item] = await buscarItens(req.usuarioId, req.params.id);
+    res.json(item);
+}
+
+// PATCH /api/estante/:id/leitura  (corpo: { paginasLidas, descricaoLeitura })
+export async function atualizarLeitura(req, res) {
+    const paginasLidas = Number(req.body.paginasLidas);
+    const descricaoLeitura = req.body.descricaoLeitura ?? "";
+
+    if (!Number.isInteger(paginasLidas) || paginasLidas < 0) {
+        return res.status(400).json({ erro: "Informe uma quantidade válida de páginas lidas." });
+    }
+    if (typeof descricaoLeitura !== "string") {
+        return res.status(400).json({ erro: "A nota de leitura precisa ser um texto." });
+    }
+
+    const [itens] = await banco.query(
+        `SELECT item_estante.id, livro.paginas
+         FROM item_estante
+         JOIN livro ON livro.id = item_estante.livro_id
+         WHERE item_estante.id = ? AND item_estante.usuario_id = ?`,
+        [req.params.id, req.usuarioId],
+    );
+    if (itens.length === 0) {
+        return res.status(404).json({ erro: "Livro não encontrado na sua estante." });
+    }
+    if (itens[0].paginas && paginasLidas > itens[0].paginas) {
+        return res.status(400).json({ erro: "As páginas lidas não podem passar do total de páginas." });
+    }
+
+    await banco.query(
+        "UPDATE item_estante SET paginas_lidas = ?, descricao_leitura = ? WHERE id = ? AND usuario_id = ?",
+        [paginasLidas, descricaoLeitura.trim(), req.params.id, req.usuarioId],
+    );
 
     const [item] = await buscarItens(req.usuarioId, req.params.id);
     res.json(item);

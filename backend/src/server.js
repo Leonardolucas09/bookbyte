@@ -3,7 +3,7 @@ import cors from "cors";
 import { buscarLivros } from "./openLibrary.js";
 import { cadastrar, entrar } from "./usuarios.js";
 import { verificarLogin } from "./verificarLogin.js";
-import { listarEstante, adicionarLivro, atualizarStatus } from "./estante.js";
+import { listarEstante, adicionarLivro, atualizarLeitura } from "./estante.js";
 
 const app = express();
 app.use(cors()); // deixa o front-end (Vue) chamar esta API
@@ -16,7 +16,7 @@ app.post("/api/login", entrar);
 // Estante: só funciona com login, e cada usuário vê só a dele
 app.get("/api/estante", verificarLogin, listarEstante);
 app.post("/api/estante", verificarLogin, adicionarLivro);
-app.patch("/api/estante/:id", verificarLogin, atualizarStatus);
+app.patch("/api/estante/:id/leitura", verificarLogin, atualizarLeitura);
 
 // Exemplo: GET http://localhost:3000/api/livros/busca?q=duna
 app.get("/api/livros/busca", async (req, res) => {
