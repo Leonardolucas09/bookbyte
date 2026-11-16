@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS item_estante (
     livro_id INT NOT NULL,
     status_leitura VARCHAR(20) NOT NULL DEFAULT 'Quero Ler',
     paginas_lidas INT NOT NULL DEFAULT 0,
+    descricao_leitura TEXT,
     atualizado_em DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     UNIQUE (usuario_id, livro_id), -- o mesmo livro não entra duas vezes na estante
     FOREIGN KEY (usuario_id) REFERENCES usuario (id),

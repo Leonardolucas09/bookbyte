@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { pegarEstante, salvarNaEstante, mudarStatus } from "./api.js";
+import { pegarEstante, salvarNaEstante, salvarAtualizacaoLeitura } from "./api.js";
 
 // Livros da estante do usuário logado. Ficam salvos no banco, pela API.
 export const estante = ref([]);
@@ -13,10 +13,11 @@ export async function adicionarNaEstante(livro) {
     estante.value.push(novoLivro);
 }
 
-export async function atualizarStatus(id, statusLeitura) {
-    const livroAtualizado = await mudarStatus(id, statusLeitura);
+export async function atualizarLeitura(id, paginasLidas, descricaoLeitura, statusLeitura) {
+    const livroAtualizado = await salvarAtualizacaoLeitura(id, paginasLidas, descricaoLeitura, statusLeitura);
     const posicao = estante.value.findIndex(item => item.id === id);
-    estante.value[posicao] = livroAtualizado;
+    if (posicao !== -1) estante.value[posicao] = livroAtualizado;
+    return livroAtualizado;
 }
 
 export function estaNaEstante(livro) {

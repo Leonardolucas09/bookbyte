@@ -33,6 +33,24 @@ POST /api/cadastro
 
 A senha nunca é salva: o banco guarda só o hash dela (bcrypt).
 
+## Atualizar o progresso e a nota pessoal de leitura
+
+```http
+PATCH /api/estante/12/leitura
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{ "statusLeitura": "Lendo", "paginasLidas": 184, "descricaoLeitura": "Gostei muito deste capítulo." }
+```
+
+O status, o progresso e a nota são salvos pelo modal. O progresso é salvo como quantidade de páginas no item da estante do usuário; a interface também aceita porcentagem e converte para páginas usando o total cadastrado. A nota é privada e só pode ser criada ou editada enquanto o status for `Lendo`; ao mudar para outro status, a nota existente é preservada.
+
+Em um banco já criado, execute uma vez:
+
+```sql
+ALTER TABLE item_estante ADD COLUMN descricao_leitura TEXT;
+```
+
 ## Login
 
 ```

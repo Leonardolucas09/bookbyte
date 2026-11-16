@@ -55,6 +55,6 @@ export function salvarNaEstante(livro) {
     return chamarApi("POST", "/api/estante", livro);
 }
 
-export function mudarStatus(id, statusLeitura) {
-    return chamarApi("PATCH", "/api/estante/" + id, { statusLeitura });
+export function salvarAtualizacaoLeitura(id, paginasLidas, descricaoLeitura, statusLeitura) {
+    return chamarApi("PATCH", "/api/estante/" + id + "/leitura", { paginasLidas, descricaoLeitura, statusLeitura });
 }
