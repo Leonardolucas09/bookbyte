@@ -1,7 +1,13 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
+import ForcaSenha from "../components/ForcaSenha.vue";
+import IconeCadeado from "../components/icons/IconeCadeado.vue";
+import XButton from "../components/X-Button.vue";
+import XInput from "../components/X-Input.vue";
+import LayoutAutenticacao from "../layouts/LayoutAutenticacao.vue";
 import { cadastrar } from "../services/api.js";
+import { TAMANHO_MINIMO_SENHA } from "../utils/senha.js";
 
 const router = useRouter();
 
@@ -9,222 +15,145 @@ const nomeUsuario = ref("");
 const email = ref("");
 const senha = ref("");
 const confirmarSenha = ref("");
+const aceitouTermos = ref(false);
 const erro = ref("");
+const enviando = ref(false);
+
+const senhasCoincidem = computed(() => senha.value === confirmarSenha.value);
+
+const validarFormulario = () => {
+    if (!nomeUsuario.value || !email.value || !senha.value || !confirmarSenha.value) {
+        return "Preencha todos os campos.";
+    }
+    if (senha.value.length < TAMANHO_MINIMO_SENHA) {
+        return `A senha precisa ter pelo menos ${TAMANHO_MINIMO_SENHA} caracteres.`;
+    }
+    if (!senhasCoincidem.value) {
+        return "As senhas não são iguais.";
+    }
+    if (!aceitouTermos.value) {
+        return "Aceite os Termos de uso e a Política de privacidade para continuar.";
+    }
+    return "";
+};
 
 const criarConta = async () => {
-    erro.value = "";
+    erro.value = validarFormulario();
+    if (erro.value) return;
 
-    if (!nomeUsuario.value || !email.value || !senha.value || !confirmarSenha.value) {
-        erro.value = "Preencha todos os campos.";
-        return;
-    }
-    if (senha.value !== confirmarSenha.value) {
-        erro.value = "As senhas não são iguais.";
-        return;
-    }
-
+    enviando.value = true;
     try {
         await cadastrar(nomeUsuario.value, email.value, senha.value);
-        // Conta criada: vai para o login (especificação de casos de uso)
         router.push("/login");
     }
     catch (e) {
         erro.value = e.message;
     }
-};
-
-const goToLogin = () => {
-    router.push("/login");
+    finally {
+        enviando.value = false;
+    }
 };
 </script>
 
 <template>
-  <div class="cardTelaCadastro">
-    <div class="containerTelaCadastro">
+    <LayoutAutenticacao
+        titulo-painel="Toda boa história tem um começo."
+        titulo="Comece sua história."
+        subtitulo="Crie sua conta grátis e dê um lugar aos seus livros."
+    >
+        <form
+            class="flex flex-col gap-4"
+            novalidate
+            @submit.prevent="criarConta"
+        >
+            <XInput
+                v-model="nomeUsuario"
+                label="Nome"
+                name="nomeUsuario"
+                placeholder="Como quer ser chamada?"
+                autocomplete="username"
+            />
 
-      <div class="form-boxTelaCadastro">
+            <div class="flex flex-col gap-1">
+                <XInput
+                    v-model="email"
+                    label="E-mail"
+                    name="email"
+                    type="email"
+                    placeholder="seu@email.com"
+                    autocomplete="email"
+                />
+                <span class="text-xs text-light-brown">Vamos usar este e-mail para acessar sua estante.</span>
+            </div>
 
-        <div class="text-titleTelaCadastro">
-          Cadastrar
-        </div>
+            <div class="flex flex-col gap-1">
+                <XInput
+                    v-model="senha"
+                    label="Senha"
+                    name="senha"
+                    type="password"
+                    placeholder="Crie uma senha"
+                    autocomplete="new-password"
+                />
+                <ForcaSenha :senha="senha" />
+            </div>
 
-        <form class="formularioTelaCadastro" @submit.prevent="criarConta">
+            <div class="flex flex-col gap-1">
+                <XInput
+                    v-model="confirmarSenha"
+                    label="Confirmar senha"
+                    name="confirmarSenha"
+                    type="password"
+                    placeholder="Repita a senha"
+                    autocomplete="new-password"
+                />
+                <span
+                    v-if="confirmarSenha"
+                    class="text-xs"
+                    :class="senhasCoincidem ? 'text-light-brown' : 'text-error'"
+                    aria-live="polite"
+                >
+                    {{ senhasCoincidem ? "As senhas coincidem." : "As senhas não coincidem." }}
+                </span>
+            </div>
 
-          <input
-            v-model="nomeUsuario"
-            type="text"
-            placeholder="Digite um nome de usuário"
-            class="inputTelaCadastro"
-          />
+            <XInput
+                v-model="aceitouTermos"
+                label="Li e aceito os Termos de uso e a Política de privacidade."
+                name="aceitouTermos"
+                type="checkbox"
+            />
 
-          <input
-            v-model="email"
-            type="email"
-            placeholder="Digite seu e-mail"
-            class="inputTelaCadastro"
-          />
-
-          <input
-            v-model="senha"
-            type="password"
-            placeholder="Crie uma senha"
-            class="inputTelaCadastro"
-          />
-
-          <input
-            v-model="confirmarSenha"
-            type="password"
-            placeholder="Confirme sua senha"
-            class="inputTelaCadastro"
-          />
-
-          <p v-if="erro" class="erroCadastro">
-            {{ erro }}
-          </p>
-
-          <button
-            type="submit"
-            class="btnCadastro"
-          >
-            Cadastrar
-          </button>
-
-          <div class="login-boxCadastro">
-            <a
-              href="#"
-              class="linkCadastro"
-              @click.prevent="goToLogin"
+            <p
+                v-if="erro"
+                class="text-sm text-error"
+                role="alert"
             >
-              Já possui uma conta? Entrar
-            </a>
-          </div>
+                {{ erro }}
+            </p>
 
+            <XButton
+                :text="enviando ? 'Criando conta...' : 'Criar conta grátis'"
+                type="submit"
+                :disabled="enviando"
+            />
+
+            <p class="flex items-start gap-3 text-xs text-light-brown">
+                <IconeCadeado class="mt-0.5 shrink-0" />
+                Sua estante e suas notas são pessoais. Sem pressa, sem cobranças.
+            </p>
         </form>
 
-      </div>
-
-      <p class="footer-textCadastro">
-        @2026 BugOps
-      </p>
-
-    </div>
-  </div>
+        <template #alternativa>
+            <p class="text-center text-sm text-light-brown">
+                Já tem uma conta?
+                <RouterLink
+                    to="/login"
+                    class="ml-1 font-semibold text-brown"
+                >
+                    Entrar
+                </RouterLink>
+            </p>
+        </template>
+    </LayoutAutenticacao>
 </template>
-
-<style scoped>
-
-.cardTelaCadastro{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  width: 100%;
-  background: radial-gradient(circle at top, #0b0b0b,#000000);
-  font-family: 'Poppins', sans-serif;
-}
-
-.containerTelaCadastro{
-  width: 360px;
-  padding: 20px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 20px;
-  box-shadow: 0 0 8px rgba(0,255,170,0.08),
-              0 0 20px rgba(0,255,170,0.04);
-  position: relative;
-}
-
-.form-boxTelaCadastro{
-  width: 300px;
-  background: #111;
-  border-radius: 20px;
-  box-shadow: 0 0 12px rgba(39,239,178,0.08),
-              0 0 40px rgba(0,255,170,0.08);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 30px 20px;
-}
-
-.text-titleTelaCadastro{
-  color:#d9d9d9;
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 25px;
-}
-
-.formularioTelaCadastro{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  width: 100%;
-}
-
-.inputTelaCadastro{
-  width: 240px;
-  height: 45px;
-  border-radius: 12px;
-  border: none;
-  padding: 0 15px;
-  font-size: 15px;
-  background-color: #1a1a1a;
-  color: #fff;
-}
-
-.inputTelaCadastro::placeholder{
-  color: #a1a1a1;
-}
-
-.inputTelaCadastro:focus{
-  outline: none;
-  box-shadow: 0 0 5px rgba(39,239,178,0.5);
-}
-
-.btnCadastro{
-  width: 240px;
-  height: 50px;
-  border: none;
-  border-radius: 8px;
-  background-color: #27efb2;
-  color: #000;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
-  transition: .3s;
-}
-
-.btnCadastro:hover{
-  box-shadow: 0 0 10px rgba(39,239,178,0.5);
-  transform: scale(1.03);
-}
-
-.erroCadastro{
-  width: 240px;
-  color: #ff8a80;
-  font-size: 14px;
-  text-align: center;
-}
-
-.login-boxCadastro{
-  margin-top: 5px;
-}
-
-.linkCadastro{
-  color: #969696;
-  font-size: 14px;
-  text-decoration: underline;
-}
-
-.linkCadastro:hover{
-  color: #27efb2;
-}
-
-.footer-textCadastro{
-  margin-top: 15px;
-  font-size: 12px;
-  color: #666;
-}
-
-</style>
