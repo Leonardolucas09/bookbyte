@@ -6,7 +6,7 @@ const props = defineProps({
     name: { type: String, required: true },
     type: { type: String, default: "text" },
     placeholder: { type: String, default: "" },
-    modelValue: { type: [String, Number], default: "" },
+    modelValue: { type: [String, Number, Boolean], default: "" },
     autocomplete: { type: String, default: undefined },
 });
 

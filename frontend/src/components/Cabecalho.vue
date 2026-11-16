@@ -6,6 +6,10 @@ import Fechar from './icons/Fechar.vue';
 import { buscarLivros } from '../services/api.js';
 import { adicionarNaEstante, estaNaEstante } from '../services/estante.js';
 
+// Duas primeiras letras do nome de usuário, para o círculo do perfil
+const usuario = JSON.parse(localStorage.getItem('usuario')) || {};
+const iniciais = (usuario.nomeUsuario || '').slice(0, 2).toUpperCase();
+
 const busca = ref('');
 const mostrarSugestoes = ref(false);
 const resultados = ref([]);
@@ -49,7 +53,7 @@ const limparBusca = () => {
             <LogoBookByte />
             <span class="ml-6 hidden text-light-brown md:inline">Um capítulo de cada vez.</span>
             <div class="rounded-full bg-[#EDE3D5] p-3 font-semibold text-brown md:hidden">
-                <span>CL</span>
+                <span>{{ iniciais }}</span>
             </div>
         </div>
 
@@ -117,7 +121,7 @@ const limparBusca = () => {
         </div>
 
         <div class="hidden rounded-full bg-[#EDE3D5] p-3 font-semibold text-brown md:block">
-            <span>CL</span>
+            <span>{{ iniciais }}</span>
         </div>
     </header>
 </template>

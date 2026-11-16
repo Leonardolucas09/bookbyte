@@ -4,6 +4,7 @@ import IconeDescobrir from "./icons/IconeDescobrir.vue";
 import IconeNotas from "./icons/IconeNotas.vue";
 import IconeCafe from "./icons/IconeCafe.vue";
 import IconeConfiguracoes from "./icons/IconeConfiguracoes.vue";
+import { sair } from "../services/api.js";
 
 const menuItems = [
     { nome: "Estante", rota: "/estante", icone: IconeEstante },
@@ -52,6 +53,13 @@ const menuItems = [
                 <IconeConfiguracoes class="size-5" />
                 <span>Configurações</span>
             </RouterLink>
+            <button
+                type="button"
+                class="text-left text-light-brown hover:text-brown"
+                @click="sair"
+            >
+                Sair
+            </button>
         </div>
     </aside>
 </template>
