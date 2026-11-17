@@ -4,8 +4,12 @@ import { pegarEstante, salvarNaEstante, salvarAtualizacaoLeitura } from "./api.j
 // Livros da estante do usuário logado. Ficam salvos no banco, pela API.
 export const estante = ref([]);
 
+// Fica true quando a estante terminou de carregar
+export const estanteCarregada = ref(false);
+
 export async function carregarEstante() {
     estante.value = await pegarEstante();
+    estanteCarregada.value = true;
 }
 
 export async function adicionarNaEstante(livro) {

@@ -107,12 +107,16 @@ export async function atualizarStatus(req, res) {
 export async function atualizarLeitura(req, res) {
     const paginasLidas = Number(req.body.paginasLidas);
     const descricaoLeitura = req.body.descricaoLeitura ?? "";
+    const statusLeitura = req.body.statusLeitura;
 
     if (!Number.isInteger(paginasLidas) || paginasLidas < 0) {
         return res.status(400).json({ erro: "Informe uma quantidade válida de páginas lidas." });
     }
     if (typeof descricaoLeitura !== "string") {
         return res.status(400).json({ erro: "A nota de leitura precisa ser um texto." });
+    }
+    if (!STATUS_VALIDOS.includes(statusLeitura)) {
+        return res.status(400).json({ erro: "Status inválido." });
     }
 
     const [itens] = await banco.query(
@@ -130,8 +134,8 @@ export async function atualizarLeitura(req, res) {
     }
 
     await banco.query(
-        "UPDATE item_estante SET paginas_lidas = ?, descricao_leitura = ? WHERE id = ? AND usuario_id = ?",
-        [paginasLidas, descricaoLeitura.trim(), req.params.id, req.usuarioId],
+        "UPDATE item_estante SET paginas_lidas = ?, descricao_leitura = ?, status_leitura = ? WHERE id = ? AND usuario_id = ?",
+        [paginasLidas, descricaoLeitura.trim(), statusLeitura, req.params.id, req.usuarioId],
     );
 
     const [item] = await buscarItens(req.usuarioId, req.params.id);

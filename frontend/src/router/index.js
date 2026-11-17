@@ -4,6 +4,7 @@ import Estante from "../Pages/Estante.vue";
 import Descobrir from "../Pages/Descobrir.vue";
 import NotasLeitura from "../Pages/NotasLeitura.vue";
 import Configuracoes from "../Pages/Configuracoes.vue";
+import DetalhesLivro from "../Pages/DetalhesLivro.vue";
 import Login from "../Pages/Login.vue";
 import Cadastro from "../Pages/Cadastro.vue";
 import RecuperarSenha from "../Pages/RecuperarSenha.vue";
@@ -18,6 +19,7 @@ const routes = [
             { path: "descobrir", name: "descobrir", component: Descobrir },
             { path: "notas", name: "notas", component: NotasLeitura },
             { path: "configuracoes", name: "configuracoes", component: Configuracoes },
+            { path: "livro/:id", name: "detalhesLivro", component: DetalhesLivro },
         ],
     },
     { path: "/login", name: "login", component: Login },
