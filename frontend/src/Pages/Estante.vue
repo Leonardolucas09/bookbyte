@@ -14,7 +14,7 @@ const editandoMeta = ref(false);
 const anoAtual = new Date().getFullYear();
 const paginasLidasNoMes = computed(() =>
     estante.value
-        .filter((livro) => livro.statusLeitura === "Lendo")
+        // .filter((livro) => livro.statusLeitura === "Lendo")
         .reduce((total, livro) => total + (Number(livro.paginasLidas) || 0), 0)
 );
 const diasLeituraNoMes = computed(() => {
@@ -22,7 +22,7 @@ const diasLeituraNoMes = computed(() => {
     const dias = new Set();
 
     estante.value.forEach((livro) => {
-        if (livro.statusLeitura !== "Lendo" || !livro.atualizadoEm) return;
+        if (!livro.atualizadoEm) return;
         const data = new Date(livro.atualizadoEm);
         if (data.getMonth() === agora.getMonth() && data.getFullYear() === agora.getFullYear()) {
             dias.add(data.toDateString());
