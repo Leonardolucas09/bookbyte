@@ -4,6 +4,7 @@ import IconeDescobrir from "./icons/IconeDescobrir.vue";
 import IconeNotas from "./icons/IconeNotas.vue";
 import IconeCafe from "./icons/IconeCafe.vue";
 import IconeConfiguracoes from "./icons/IconeConfiguracoes.vue";
+import IconeSair from "./icons/IconeSair.vue";
 import { sair } from "../services/api.js";
 
 const menuItems = [
@@ -55,10 +56,11 @@ const menuItems = [
             </RouterLink>
             <button
                 type="button"
-                class="text-left text-light-brown hover:text-brown"
+                class="mt-4 flex cursor-pointer items-center gap-3 text-light-brown hover:text-brown"
                 @click="sair"
             >
-                Sair
+                <IconeSair class="size-5" />
+                <span>Sair</span>
             </button>
         </div>
     </aside>
