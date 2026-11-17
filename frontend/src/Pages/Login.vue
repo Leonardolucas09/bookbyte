@@ -91,7 +91,7 @@ const fazerLogin = async () => {
 
         <template #alternativa>
             <div class="flex flex-col gap-3">
-                <span class="text-sm text-olive-900">Ainda não tem uma conta?</span>
+                <span class="text-sm text-ink">Ainda não tem uma conta?</span>
                 <RouterLink
                     to="/cadastro"
                     class="flex w-full justify-center rounded-md border border-line bg-input px-4 py-2 font-semibold text-brown transition-opacity hover:opacity-90"

@@ -14,7 +14,7 @@ const modelo = defineModel({ type: String, default: "" });
     <div class="flex flex-col gap-1">
         <label
             :for="name"
-            class="text-sm text-olive-900"
+            class="text-sm text-ink"
         >
             {{ label }}
         </label>

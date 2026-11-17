@@ -10,7 +10,7 @@ const props = defineProps({
 
 <template>
     <div class="flex">
-        <div class="flex w-full items-center justify-between border-2 border-[#E1DCD2] rounded-3xl bg-[#FFFEFA] px-8 py-3">
+        <div class="flex w-full items-center justify-between border-2 border-line rounded-3xl bg-input px-8 py-3">
             <div class="flex gap-6">
                 <img
                     :src="livro.capa"
@@ -26,7 +26,7 @@ const props = defineProps({
                         <StatusLeitura :status="livro.statusLeitura" />
                         <span
                             v-if="livro.statusLeitura === 'Lendo' && livro.paginas > 0"
-                            class="whitespace-nowrap text-sm text-[#81796F]"
+                            class="whitespace-nowrap text-sm text-light-brown"
                         >
                             {{ livro.paginasLidas }} de {{ livro.paginas }} páginas · {{ Math.round((livro.paginasLidas / livro.paginas) * 100) }}%
                         </span>
@@ -40,8 +40,8 @@ const props = defineProps({
                 </div>
             </div>
                 <a href="#" class="flex gap-2 items-center p-4 rounded-xl
-                                    text-brown border-2 border-[#E1DCD2] font-semibold">
-                    <Lapis/>
+                                    text-brown border-2 border-line font-semibold">
+                    <Lapis class="text-brown" />
                     Atualizar leitura
                 </a>
         </div>

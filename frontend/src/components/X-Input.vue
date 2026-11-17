@@ -26,14 +26,14 @@ const updateValue = (event) => {
                 :name="name"
                 type="checkbox"
                 :checked="Boolean(modelValue)"
-                class="h-4.5 w-4.5 accent-[#785A3E]"
+                class="h-4.5 w-4.5 accent-brown"
                 @change="emit('update:modelValue', $event.target.checked)"
             />
-            <label :for="name" class="text-sm text-olive-900">{{ label }}</label>
+            <label :for="name" class="text-sm text-ink">{{ label }}</label>
         </template>
 
         <template v-else>
-            <label :for="name" class="text-left text-sm text-olive-900">
+            <label :for="name" class="text-left text-sm text-ink">
                 {{ label }}
             </label>
 
@@ -47,7 +47,7 @@ const updateValue = (event) => {
                     :placeholder="placeholder"
                     :autocomplete="autocomplete"
                     :value="modelValue"
-                    class="bg-input stroke-input w-full rounded-md py-2 pl-3 pr-16 outline-none focus:ring-2 focus:ring-brown"
+                    class="bg-input border border-brown w-full rounded-md py-2 pl-3 pr-16 outline-none focus:ring-2 focus:ring-brown"
                     @input="updateValue"
                 />
                 <input
@@ -58,7 +58,7 @@ const updateValue = (event) => {
                     :placeholder="placeholder"
                     :autocomplete="autocomplete"
                     :value="modelValue"
-                    class="bg-input stroke-input w-full rounded-md py-2 pl-3 pr-16 outline-none focus:ring-2 focus:ring-brown"
+                    class="bg-input border border-brown w-full rounded-md py-2 pl-3 pr-16 outline-none focus:ring-2 focus:ring-brown"
                     @input="updateValue"
                 />
             </template>
@@ -72,8 +72,8 @@ const updateValue = (event) => {
                 :autocomplete="autocomplete"
                 :value="modelValue"
                 :class="type === 'checkbox'
-                    ? 'h-4.5 w-4.5 accent-[#785A3E]'
-                    : 'bg-input stroke-input w-full rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-brown'"
+                    ? 'h-4.5 w-4.5 accent-brown'
+                    : 'bg-input border border-brown w-full rounded-md px-3 py-2 outline-none focus:ring-2 focus:ring-brown'"
                 @input="updateValue"
             />
 

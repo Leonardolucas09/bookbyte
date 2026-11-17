@@ -1,19 +1,33 @@
 @import 'tailwindcss';
 
-@theme {
-    --color-brown: #785A3E;
-    --color-light-brown: #777168;
-    --color-cream: #F7EDD7;
-    --color-input: #FFFEFA;
-    --color-sand: #EDE4D8;
-    --color-line: #E1DCD2;
-    --color-paper: #EEE9DF;
-    --color-field: #F3F0EA;
-    --color-error: #8A4E48;
-    --color-success: #3D6945;
+/* "inline" faz as classes (bg-brown, text-ink...) apontarem direto para as variáveis --tema-*,
+   então trocar o data-tema de qualquer elemento troca as cores de tudo dentro dele. */
+@theme inline {
+    --color-brown: var(--tema-brown);
+    --color-brown-dark: var(--tema-brown-dark);
+    --color-brown-soft: var(--tema-brown-soft);
+    --color-on-brown: var(--tema-on-brown);
+    --color-light-brown: var(--tema-light-brown);
+    --color-ink: var(--tema-ink);
+    --color-cream: var(--tema-cream);
+    --color-input: var(--tema-input);
+    --color-sand: var(--tema-sand);
+    --color-line: var(--tema-line);
+    --color-line-strong: var(--tema-line-strong);
+    --color-paper: var(--tema-paper);
+    --color-field: var(--tema-field);
+    --color-error: var(--tema-error);
+    --color-error-soft: var(--tema-error-soft);
+    --color-success: var(--tema-success);
+    --color-success-soft: var(--tema-success-soft);
+    --color-info: var(--tema-info);
+    --color-info-soft: var(--tema-info-soft);
 
     --font-lora: "Lora", serif;
+    --font-leitura: var(--fonte-leitura);
+}
 
+@theme {
     --animate-scroll: scroll 280s linear infinite;
 
     @keyframes scroll {
@@ -22,12 +36,104 @@
     }
 }
 
+:root,
+[data-tema="claro"] {
+    --tema-brown: #785A3E;
+    --tema-brown-dark: #634A34;
+    --tema-brown-soft: #A98D70;
+    --tema-on-brown: #FFFEFA;
+    --tema-light-brown: #777168;
+    --tema-ink: #302D2A;
+    --tema-cream: #F7EDD7;
+    --tema-input: #FFFEFA;
+    --tema-sand: #EDE4D8;
+    --tema-line: #E1DCD2;
+    --tema-line-strong: #C8B9A7;
+    --tema-paper: #EEE9DF;
+    --tema-field: #F3F0EA;
+    --tema-error: #8A4E48;
+    --tema-error-soft: #F2DDDA;
+    --tema-success: #3D6945;
+    --tema-success-soft: #DDEBDD;
+    --tema-info: #426481;
+    --tema-info-soft: #DDE8F2;
+    color-scheme: light;
+}
+
+[data-tema="sepia"] {
+    --tema-brown: #7A5636;
+    --tema-brown-dark: #634429;
+    --tema-brown-soft: #A88763;
+    --tema-on-brown: #FBF4E6;
+    --tema-light-brown: #75664F;
+    --tema-ink: #3B2F22;
+    --tema-cream: #F1E2C2;
+    --tema-input: #F8F0E1;
+    --tema-sand: #E8D8BC;
+    --tema-line: #DECDB0;
+    --tema-line-strong: #C4AD8A;
+    --tema-paper: #EDE0C8;
+    --tema-field: #F1E7D4;
+    --tema-error: #8A4A3E;
+    --tema-error-soft: #EFD6CC;
+    --tema-success: #49663A;
+    --tema-success-soft: #DCE3C8;
+    --tema-info: #4A5F78;
+    --tema-info-soft: #DCE0DD;
+    color-scheme: light;
+}
+
+[data-tema="escuro"] {
+    --tema-brown: #C9A27A;
+    --tema-brown-dark: #DDB990;
+    --tema-brown-soft: #8C6F52;
+    --tema-on-brown: #1F1C19;
+    --tema-light-brown: #A89F92;
+    --tema-ink: #EDE6DA;
+    --tema-cream: #3A332B;
+    --tema-input: #1F1C19;
+    --tema-sand: #3A332B;
+    --tema-line: #3D3731;
+    --tema-line-strong: #574E44;
+    --tema-paper: #2A2622;
+    --tema-field: #2E2A25;
+    --tema-error: #E09A92;
+    --tema-error-soft: #3D2624;
+    --tema-success: #8FBF95;
+    --tema-success-soft: #23332A;
+    --tema-info: #8FB3D6;
+    --tema-info-soft: #22303D;
+    color-scheme: dark;
+}
+
+:root {
+    --fonte-leitura: "Lora", serif;
+}
+
+[data-fonte="inter"] {
+    --fonte-leitura: "Inter", sans-serif;
+}
+
+/* O Tailwind usa rem, então mudar o tamanho da raiz aumenta ou diminui o app inteiro */
+[data-tamanho="pequeno"] {
+    font-size: 87.5%;
+}
+
+[data-tamanho="grande"] {
+    font-size: 112.5%;
+}
+
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 
-  background-color: var(--color-input);
+  background-color: var(--tema-input);
+  color: var(--tema-ink);
 
   font-family: "Inter", sans-serif;
+}
+
+.lora {
+  font-family: var(--font-lora);
 }

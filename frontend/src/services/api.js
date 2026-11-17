@@ -1,3 +1,5 @@
+import { limparAparencia } from "../utils/aparencia.js";
+
 // Endereço da nossa API (back-end)
 const URL_API = "http://localhost:3000";
 
@@ -43,6 +45,7 @@ export function entrar(login, senha) {
 export function sair() {
     localStorage.removeItem("token");
     localStorage.removeItem("usuario");
+    limparAparencia();
     window.location.href = "/login"; // recarrega a página para limpar tudo da tela
 }
 

@@ -10,7 +10,7 @@ const ligado = defineModel({ type: Boolean, default: false });
 <template>
     <div class="flex items-center justify-between gap-4">
         <div class="flex flex-col gap-1">
-            <span class="text-sm text-olive-900">{{ label }}</span>
+            <span class="text-sm text-ink">{{ label }}</span>
             <span
                 v-if="descricao"
                 class="text-xs text-light-brown"

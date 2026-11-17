@@ -21,7 +21,7 @@ defineProps({
 
                 <header class="mt-12 flex flex-col gap-3 lg:mt-0">
                     <span class="text-sm uppercase text-brown">Bem-vinda ao BookByte</span>
-                    <h1 class="lora text-4xl text-olive-900">
+                    <h1 class="lora text-4xl text-ink">
                         {{ titulo }}
                     </h1>
                     <p class="text-sm text-light-brown">

@@ -10,10 +10,10 @@ const props = defineProps({
 });
 
 const estilosStatus = {
-    'Lendo': { fundo: 'bg-[#EDE3D5]', texto: 'text-[#765B3F]' },
-    'Lido': { fundo: 'bg-[#DDEBDD]', texto: 'text-[#3D6945]' },
-    'Quero Ler': { fundo: 'bg-[#DDE8F2]', texto: 'text-[#426481]' },
-    'Abandonei': { fundo: 'bg-[#F2DDDA]', texto: 'text-[#8A4E48]' },
+    'Lendo': { fundo: 'bg-sand', texto: 'text-brown' },
+    'Lido': { fundo: 'bg-success-soft', texto: 'text-success' },
+    'Quero Ler': { fundo: 'bg-info-soft', texto: 'text-info' },
+    'Abandonei': { fundo: 'bg-error-soft', texto: 'text-error' },
 };
 
 const estiloAtual = computed(() => estilosStatus[props.status] ?? estilosStatus.Lendo);

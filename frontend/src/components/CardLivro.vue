@@ -12,7 +12,7 @@ const modalAberto = ref(false);
 
 <template>
     <a @click="modalAberto = true" class="flex flex-col gap-2 w-48 cursor-pointer">
-        <div class="flex  w-fit rounded-md bg-[#EEE9DF] px-8 py-3">
+        <div class="flex  w-fit rounded-md bg-paper px-8 py-3">
             <img
                 :src="livro.capa"
                 :alt="`Capa de ${livro.titulo}`"
@@ -28,7 +28,7 @@ const modalAberto = ref(false);
                 <StatusLeitura :status="livro.statusLeitura" />
                 <span
                     v-if="livro.statusLeitura === 'Lendo' && livro.paginas > 0"
-                    class="text-lg font-medium text-[#765B3F]"
+                    class="text-lg font-medium text-brown"
                 >
                     {{ Math.round((livro.paginasLidas / livro.paginas) * 100) }}%
                 </span>

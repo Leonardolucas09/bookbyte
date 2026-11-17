@@ -12,6 +12,7 @@ import MensagemStatus from "../components/MensagemStatus.vue";
 import { useSalvamento } from "../composables/useSalvamento.js";
 import { pegarUsuario, sair, salvarPerfil, salvarPreferencias } from "../services/api.js";
 import { estante } from "../services/estante.js";
+import { aplicarAparencia } from "../utils/aparencia.js";
 import { guardarUsuarioLogado, pegarIniciais, pegarUsuarioLogado } from "../utils/usuario.js";
 
 const anoAtual = new Date().getFullYear();
@@ -60,10 +61,9 @@ onMounted(async () => {
     // Criado só depois de carregar, para não salvar os valores que acabaram de vir da API.
     // A aparência não tem botão "Salvar" no layout: salva assim que muda.
     watch([tema, fonteLeitura, tamanhoTexto], () => {
-        aparencia.salvar(
-            () => salvarPreferencias({ tema: tema.value, fonteLeitura: fonteLeitura.value, tamanhoTexto: tamanhoTexto.value }),
-            "Aparência salva.",
-        );
+        const escolha = { tema: tema.value, fonteLeitura: fonteLeitura.value, tamanhoTexto: tamanhoTexto.value };
+        aplicarAparencia(escolha);
+        aparencia.salvar(() => salvarPreferencias(escolha), "Aparência salva.");
     });
 });
 
@@ -99,9 +99,9 @@ const OPCOES_TAMANHO = [
 ];
 
 const TEMAS = [
-    { valor: "claro", nome: "Claro", fundo: "bg-input", destaque: "bg-brown", linha: "bg-line" },
-    { valor: "sepia", nome: "Sépia", fundo: "bg-paper", destaque: "bg-brown", linha: "bg-line" },
-    { valor: "escuro", nome: "Escuro", fundo: "bg-olive-900", destaque: "bg-input", linha: "bg-light-brown" },
+    { valor: "claro", nome: "Claro" },
+    { valor: "sepia", nome: "Sépia" },
+    { valor: "escuro", nome: "Escuro" },
 ];
 
 const LINKS_CONTA = ["Alterar senha", "Exportar livros e notas", "Privacidade e dados"];
@@ -111,7 +111,7 @@ const LINKS_CONTA = ["Alterar senha", "Exportar livros e notas", "Privacidade e 
     <div class="flex flex-col gap-8 p-5 lg:p-10">
         <header class="flex flex-col gap-3">
             <span class="text-sm uppercase text-brown">Seu espaço, {{ usuario.nomeUsuario }}</span>
-            <h1 class="lora text-4xl text-olive-900">
+            <h1 class="lora text-4xl text-ink">
                 Configurações
             </h1>
             <p class="text-light-brown">
@@ -128,7 +128,7 @@ const LINKS_CONTA = ["Alterar senha", "Exportar livros e notas", "Privacidade e 
                             {{ iniciais }}
                         </span>
                         <div class="flex flex-col gap-1">
-                            <span class="text-olive-900">{{ usuario.nomeUsuario }}</span>
+                            <span class="text-ink">{{ usuario.nomeUsuario }}</span>
                             <span class="text-xs text-light-brown">Um capítulo de cada vez.</span>
                             <button
                                 type="button"
@@ -242,23 +242,15 @@ const LINKS_CONTA = ["Alterar senha", "Exportar livros e notas", "Privacidade e 
                                 :value="opcao.valor"
                                 class="sr-only"
                             >
+                            <!-- data-tema faz a miniatura usar as cores do próprio tema, seja qual for o tema da página -->
                             <span
-                                class="flex h-14 flex-col gap-1.5 rounded p-2"
-                                :class="opcao.fundo"
+                                :data-tema="opcao.valor"
+                                class="flex h-14 flex-col gap-1.5 rounded border border-line bg-input p-2"
                                 aria-hidden="true"
                             >
-                                <span
-                                    class="h-0.5 w-1/3 rounded-full"
-                                    :class="opcao.destaque"
-                                />
-                                <span
-                                    class="h-0.5 w-full rounded-full"
-                                    :class="opcao.linha"
-                                />
-                                <span
-                                    class="h-0.5 w-full rounded-full"
-                                    :class="opcao.linha"
-                                />
+                                <span class="h-0.5 w-1/3 rounded-full bg-brown" />
+                                <span class="h-0.5 w-full rounded-full bg-line-strong" />
+                                <span class="h-0.5 w-full rounded-full bg-line-strong" />
                             </span>
                             <span class="flex items-center justify-center gap-1">
                                 {{ opcao.nome }}
@@ -288,7 +280,7 @@ const LINKS_CONTA = ["Alterar senha", "Exportar livros e notas", "Privacidade e 
                         :erro="aparencia.erro.value"
                     />
 
-                    <p class="lora rounded-lg bg-paper p-4 text-lg text-olive-900">
+                    <p class="rounded-lg bg-paper p-4 font-leitura text-lg text-ink">
                         Toda página é um novo lugar. Reserve um tempo para uma boa história.
                     </p>
                 </CartaoSecao>
@@ -313,8 +305,8 @@ const LINKS_CONTA = ["Alterar senha", "Exportar livros e notas", "Privacidade e 
                     </ul>
 
                     <XButton
-                        color="var(--color-input)"
-                        text-color="var(--color-brown)"
+                        color="var(--tema-input)"
+                        text-color="var(--tema-brown)"
                         class="flex items-center justify-center gap-2 border border-line font-semibold"
                         @click="sair"
                     >

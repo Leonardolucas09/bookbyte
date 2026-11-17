@@ -47,23 +47,23 @@ const limparBusca = () => {
 </script>
 
 <template>
-    <header class="flex flex-col gap-3 bg-[#FFFEFA] px-6 py-4 md:flex-row md:items-center md:gap-6 border-b border-sand">
+    <header class="flex flex-col gap-3 bg-input px-6 py-4 md:flex-row md:items-center md:gap-6 border-b border-sand">
         <div class="flex w-full items-center justify-between md:w-auto md:justify-start">
             <LogoBookByte />
             <span class="ml-6 hidden text-light-brown md:inline">Um capítulo de cada vez.</span>
-            <div class="rounded-full bg-[#EDE3D5] p-3 font-semibold text-brown md:hidden">
+            <div class="rounded-full bg-sand p-3 font-semibold text-brown md:hidden">
                 <span>{{ iniciais }}</span>
             </div>
         </div>
 
         <div class="relative w-full md:ml-auto md:max-w-120">
-            <label class="flex h-12 items-center gap-3 rounded-xl border border-[#8C6748] bg-[#FFFEFA] px-4 focus-within:ring-2 focus-within:ring-[#8C6748]/30">
-                <Busca />
+            <label class="flex h-12 items-center gap-3 rounded-xl border border-brown bg-input px-4 focus-within:ring-2 focus-within:ring-brown/30">
+                <Busca class="text-light-brown" />
                 <input
                     v-model="busca"
                     type="text"
                     placeholder="Busque por título ou autor"
-                    class="min-w-0 flex-1 bg-transparent text-sm text-[#302E2B] outline-none placeholder:text-[#777168]"
+                    class="min-w-0 flex-1 bg-transparent text-sm text-ink outline-none placeholder:text-light-brown"
                     role="combobox"
                     aria-autocomplete="list"
                     :aria-expanded="mostrarSugestoes && busca.trim().length > 0"
@@ -74,43 +74,43 @@ const limparBusca = () => {
                 <button
                     v-if="busca"
                     type="button"
-                    class="grid h-7 w-7 shrink-0 place-items-center rounded-full hover:bg-[#F3F0EA]"
+                    class="grid h-7 w-7 shrink-0 place-items-center rounded-full hover:bg-field"
                     aria-label="Limpar busca"
                     @click="limparBusca"
                 >
-                    <Fechar />
+                    <Fechar class="text-light-brown" />
                 </button>
             </label>
 
             <div
                 v-if="mostrarSugestoes && busca.trim()"
                 id="sugestoes-livros"
-                class="absolute left-0 top-[calc(100%+8px)] z-20 flex w-full flex-col gap-3 rounded-[10px] border border-[#E1DCD2] bg-[#FFFEFA] p-4 shadow-[0_12px_32px_rgba(48,46,43,0.094)]"
+                class="absolute left-0 top-[calc(100%+8px)] z-20 flex w-full flex-col gap-3 rounded-[10px] border border-line bg-input p-4 shadow-[0_12px_32px_rgba(48,46,43,0.094)]"
                 role="listbox"
             >
-                <span class="text-[11px] font-medium uppercase tracking-wide text-[#777168]">Sugestões de livros</span>
+                <span class="text-[11px] font-medium uppercase tracking-wide text-light-brown">Sugestões de livros</span>
 
-                <p v-if="carregando" class="py-3 text-sm text-[#777168]">Buscando...</p>
+                <p v-if="carregando" class="py-3 text-sm text-light-brown">Buscando...</p>
 
-                <p v-else-if="erro" class="py-3 text-sm text-[#8A4E48]">{{ erro }}</p>
+                <p v-else-if="erro" class="py-3 text-sm text-error">{{ erro }}</p>
 
-                <p v-else-if="resultados.length === 0" class="py-3 text-sm text-[#777168]">Nenhum livro encontrado.</p>
+                <p v-else-if="resultados.length === 0" class="py-3 text-sm text-light-brown">Nenhum livro encontrado.</p>
 
                 <div
                     v-for="livro in resultados"
                     :key="livro.titulo + livro.autor"
-                    class="flex items-center gap-4 rounded-lg p-2 hover:bg-[#F5F3EF]"
+                    class="flex items-center gap-4 rounded-lg p-2 hover:bg-field"
                 >
                     <img :src="livro.capa" :alt="`Capa de ${livro.titulo}`" class="h-18 w-13 shrink-0 rounded object-cover shadow-sm" />
                     <span class="flex min-w-0 flex-1 flex-col gap-1">
-                        <span class="truncate text-sm font-medium text-[#302E2B]">{{ livro.titulo }}</span>
-                        <span class="truncate text-[13px] text-[#777168]">{{ livro.autor }} · {{ livro.ano }}</span>
+                        <span class="truncate text-sm font-medium text-ink">{{ livro.titulo }}</span>
+                        <span class="truncate text-[13px] text-light-brown">{{ livro.autor }} · {{ livro.ano }}</span>
                     </span>
-                    <span v-if="estaNaEstante(livro)" class="text-sm text-[#3D6945]">Na estante</span>
+                    <span v-if="estaNaEstante(livro)" class="text-sm text-success">Na estante</span>
                     <button
                         v-else
                         type="button"
-                        class="rounded-lg border-2 border-[#E1DCD2] px-3 py-1 text-sm font-semibold text-brown"
+                        class="rounded-lg border-2 border-line px-3 py-1 text-sm font-semibold text-brown"
                         @click="adicionarNaEstante(livro)"
                     >
                         + Adicionar
@@ -119,7 +119,7 @@ const limparBusca = () => {
             </div>
         </div>
 
-        <div class="hidden rounded-full bg-[#EDE3D5] p-3 font-semibold text-brown md:block">
+        <div class="hidden rounded-full bg-sand p-3 font-semibold text-brown md:block">
             <span>{{ iniciais }}</span>
         </div>
     </header>
