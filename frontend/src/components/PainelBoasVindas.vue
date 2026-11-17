@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-    <section class="flex flex-1 flex-col gap-20 bg-[#EEE9DF]">
+    <section class="flex flex-1 flex-col gap-20 bg-paper">
         <div class="flex h-full flex-col gap-20 p-10">
             <LogoBookByte />
             <div class="flex flex-col gap-5">

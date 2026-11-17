@@ -5,10 +5,9 @@ import Busca from './icons/Busca.vue';
 import Fechar from './icons/Fechar.vue';
 import { buscarLivros } from '../services/api.js';
 import { adicionarNaEstante, estaNaEstante } from '../services/estante.js';
+import { pegarIniciais, pegarUsuarioLogado } from '../utils/usuario.js';
 
-// Duas primeiras letras do nome de usuário, para o círculo do perfil
-const usuario = JSON.parse(localStorage.getItem('usuario')) || {};
-const iniciais = (usuario.nomeUsuario || '').slice(0, 2).toUpperCase();
+const iniciais = pegarIniciais(pegarUsuarioLogado().nomeUsuario);
 
 const busca = ref('');
 const mostrarSugestoes = ref(false);

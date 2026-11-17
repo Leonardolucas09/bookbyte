@@ -10,6 +10,13 @@ CREATE TABLE IF NOT EXISTS usuario (
     nome_usuario VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
     senha_hash VARCHAR(255) NOT NULL, -- a senha nunca é salva, só o hash dela
+    meta_livros INT NOT NULL DEFAULT 20,
+    unidade_progresso VARCHAR(20) NOT NULL DEFAULT 'paginas',
+    lembrete_leitura BOOLEAN NOT NULL DEFAULT TRUE,
+    novidades_email BOOLEAN NOT NULL DEFAULT FALSE,
+    tema VARCHAR(20) NOT NULL DEFAULT 'claro',
+    fonte_leitura VARCHAR(20) NOT NULL DEFAULT 'lora',
+    tamanho_texto VARCHAR(20) NOT NULL DEFAULT 'medio',
     criado_em DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 

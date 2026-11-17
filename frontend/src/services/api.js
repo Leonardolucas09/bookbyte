@@ -58,3 +58,17 @@ export function salvarNaEstante(livro) {
 export function salvarAtualizacaoLeitura(id, paginasLidas, descricaoLeitura, statusLeitura) {
     return chamarApi("PATCH", "/api/estante/" + id + "/leitura", { paginasLidas, descricaoLeitura, statusLeitura });
 }
+
+// Perfil e preferências do usuário logado
+export function pegarUsuario() {
+    return chamarApi("GET", "/api/usuario");
+}
+
+export function salvarPerfil(nomeUsuario, email) {
+    return chamarApi("PATCH", "/api/usuario/perfil", { nomeUsuario, email });
+}
+
+// Manda só os campos que mudaram, ex.: { tema: "escuro" }
+export function salvarPreferencias(preferencias) {
+    return chamarApi("PATCH", "/api/usuario/preferencias", preferencias);
+}
