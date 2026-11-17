@@ -53,7 +53,7 @@ const ultimaAtualizacao = computed(() => {
             class="mt-6 flex flex-wrap gap-10"
         >
             <!-- Capa -->
-            <div class="h-fit rounded-md bg-[#EEE9DF] px-10 py-6">
+            <div class="h-fit rounded-md bg-paper px-10 py-6">
                 <img
                     v-if="livro.capa"
                     :src="livro.capa"
@@ -62,7 +62,7 @@ const ultimaAtualizacao = computed(() => {
                 >
                 <div
                     v-else
-                    class="h-72 w-48 rounded bg-[#DEDAD2]"
+                    class="h-72 w-48 rounded bg-line"
                 />
             </div>
 
@@ -92,7 +92,7 @@ const ultimaAtualizacao = computed(() => {
                     v-if="livro.paginas"
                     class="flex flex-col gap-1"
                 >
-                    <span class="text-sm font-semibold text-[#765B3F]">{{ porcentagem }}% lido</span>
+                    <span class="text-sm font-semibold text-brown">{{ porcentagem }}% lido</span>
                     <BarraProgresso
                         :paginas-lidas="livro.paginasLidas"
                         :total-paginas="livro.paginas"
@@ -100,7 +100,7 @@ const ultimaAtualizacao = computed(() => {
                 </div>
 
                 <!-- Dados do livro -->
-                <dl class="grid grid-cols-2 gap-4 rounded-xl border border-[#E1DCD2] p-5 text-sm">
+                <dl class="grid grid-cols-2 gap-4 rounded-xl border border-line p-5 text-sm">
                     <div>
                         <dt class="text-light-brown">
                             Editora
@@ -134,7 +134,7 @@ const ultimaAtualizacao = computed(() => {
                     </h2>
                     <p
                         v-if="livro.descricaoLeitura"
-                        class="mt-2 whitespace-pre-line rounded-xl bg-[#F5F3EF] p-4 text-sm"
+                        class="mt-2 whitespace-pre-line rounded-xl bg-field p-4 text-sm"
                     >
                         {{ livro.descricaoLeitura }}
                     </p>
@@ -148,7 +148,7 @@ const ultimaAtualizacao = computed(() => {
 
                 <button
                     type="button"
-                    class="w-fit rounded-lg bg-[#785A3E] px-5 py-3 font-semibold text-white hover:bg-[#634A34]"
+                    class="w-fit rounded-lg bg-brown px-5 py-3 font-semibold text-on-brown hover:bg-brown-dark"
                     @click="modalAberto = true"
                 >
                     Atualizar leitura
