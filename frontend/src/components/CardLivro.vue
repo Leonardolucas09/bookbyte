@@ -18,8 +18,8 @@ const props = defineProps({
         </div>
         <div class="flex max-w-md flex-col gap-2">
             <div>
-                <h4 class="lora text-lg font-semibold">{{ livro.titulo }}</h4>
-                <span class="text-sm text-light-brown">{{ livro.autor }}</span>
+                <h4 :title="livro.titulo" class="lora line-clamp-2 min-h-14 text-lg font-semibold">{{ livro.titulo }}</h4>
+                <span :title="livro.autor" class="block truncate text-sm text-light-brown">{{ livro.autor }}</span>
             </div>
             <div class="flex items-center justify-between">
                 <StatusLeitura :status="livro.statusLeitura" />

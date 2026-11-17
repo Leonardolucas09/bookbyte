@@ -51,7 +51,7 @@ const limparBusca = () => {
         <div class="flex w-full items-center justify-between md:w-auto md:justify-start">
             <LogoBookByte />
             <span class="ml-6 hidden text-light-brown md:inline">Um capítulo de cada vez.</span>
-            <div class="rounded-full bg-sand p-3 font-semibold text-brown md:hidden">
+            <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-sand font-semibold text-brown md:hidden">
                 <span>{{ iniciais }}</span>
             </div>
         </div>
@@ -119,7 +119,7 @@ const limparBusca = () => {
             </div>
         </div>
 
-        <div class="hidden rounded-full bg-sand p-3 font-semibold text-brown md:block">
+        <div class="hidden size-12 shrink-0 items-center justify-center rounded-full bg-sand font-semibold text-brown md:flex">
             <span>{{ iniciais }}</span>
         </div>
     </header>

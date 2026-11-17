@@ -225,14 +225,14 @@ const LINKS_CONTA = ["Alterar senha", "Exportar livros e notas", "Privacidade e 
                     titulo="Aparência"
                     descricao="Escolha um ambiente confortável para suas leituras."
                 >
-                    <fieldset class="grid grid-cols-3 gap-2">
+                    <fieldset class="relative grid grid-cols-3 gap-2">
                         <legend class="sr-only">
                             Tema
                         </legend>
                         <label
                             v-for="opcao in TEMAS"
                             :key="opcao.valor"
-                            class="flex cursor-pointer flex-col gap-2 rounded-lg border p-2 text-center text-xs transition-colors has-focus-visible:ring-2 has-focus-visible:ring-brown"
+                            class="relative flex cursor-pointer flex-col gap-2 rounded-lg border p-2 text-center text-xs transition-colors has-focus-visible:ring-2 has-focus-visible:ring-brown"
                             :class="tema === opcao.valor ? 'border-brown bg-sand text-brown' : 'border-line text-light-brown'"
                         >
                             <input
