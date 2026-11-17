@@ -30,6 +30,11 @@ export function buscarLivros(termo) {
     return chamarApi("GET", "/api/livros/busca?q=" + termo);
 }
 
+// Sugestões da tela Descobrir, por categoria (todos, ficcao, fantasia...)
+export function descobrirLivros(categoria) {
+    return chamarApi("GET", "/api/livros/descobrir?categoria=" + categoria);
+}
+
 // Conta
 export function cadastrar(nomeUsuario, email, senha) {
     return chamarApi("POST", "/api/cadastro", { nomeUsuario, email, senha });
