@@ -55,7 +55,7 @@ function detalhes(livro) {
         <p class="text-xs font-medium uppercase tracking-wide text-light-brown">
             Novas histórias, {{ usuario.nomeUsuario }}
         </p>
-        <h1 class="lora mt-1 text-4xl">
+        <h1 class="lora mt-1 text-4xl text-ink">
             Descobrir
         </h1>
         <p class="mt-1 text-sm text-light-brown">
@@ -128,7 +128,7 @@ function detalhes(livro) {
                     <template v-else>
                         <button
                             type="button"
-                            class="w-full cursor-pointer rounded-lg bg-brown px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#634A34] md:w-fit"
+                            class="w-full cursor-pointer rounded-lg bg-brown px-5 py-2.5 text-sm font-semibold text-on-brown hover:bg-brown-dark md:w-fit"
                             @click="adicionarNaEstante(destaque)"
                         >
                             + Adicionar à estante

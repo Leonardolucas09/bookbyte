@@ -1,3 +1,5 @@
+import { limparAparencia } from "../utils/aparencia.js";
+
 // Endereço da nossa API (back-end)
 const URL_API = "http://localhost:3000";
 
@@ -48,6 +50,7 @@ export function entrar(login, senha) {
 export function sair() {
     localStorage.removeItem("token");
     localStorage.removeItem("usuario");
+    limparAparencia();
     window.location.href = "/login"; // recarrega a página para limpar tudo da tela
 }
 
@@ -62,4 +65,18 @@ export function salvarNaEstante(livro) {
 
 export function salvarAtualizacaoLeitura(id, paginasLidas, descricaoLeitura, statusLeitura) {
     return chamarApi("PATCH", "/api/estante/" + id + "/leitura", { paginasLidas, descricaoLeitura, statusLeitura });
+}
+
+// Perfil e preferências do usuário logado
+export function pegarUsuario() {
+    return chamarApi("GET", "/api/usuario");
+}
+
+export function salvarPerfil(nomeUsuario, email) {
+    return chamarApi("PATCH", "/api/usuario/perfil", { nomeUsuario, email });
+}
+
+// Manda só os campos que mudaram, ex.: { tema: "escuro" }
+export function salvarPreferencias(preferencias) {
+    return chamarApi("PATCH", "/api/usuario/preferencias", preferencias);
 }

@@ -4,6 +4,7 @@ import { buscarLivros, buscarPorAssunto } from "./openLibrary.js";
 import { cadastrar, entrar } from "./usuarios.js";
 import { verificarLogin } from "./verificarLogin.js";
 import { listarEstante, adicionarLivro, atualizarLeitura } from "./estante.js";
+import { mostrarUsuario, atualizarPerfil, atualizarPreferencias } from "./perfil.js";
 
 const app = express();
 app.use(cors()); // deixa o front-end (Vue) chamar esta API
@@ -12,6 +13,10 @@ app.use(express.json()); // permite ler o corpo das requisições em JSON
 // Conta do usuário
 app.post("/api/cadastro", cadastrar);
 app.post("/api/login", entrar);
+
+app.get("/api/usuario", verificarLogin, mostrarUsuario);
+app.patch("/api/usuario/perfil", verificarLogin, atualizarPerfil);
+app.patch("/api/usuario/preferencias", verificarLogin, atualizarPreferencias);
 
 // Estante: só funciona com login, e cada usuário vê só a dele
 app.get("/api/estante", verificarLogin, listarEstante);

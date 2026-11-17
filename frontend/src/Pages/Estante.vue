@@ -66,7 +66,7 @@ function salvarMeta() {
 
             <aside class="sticky top-6 flex w-full max-w-md shrink-0 flex-col gap-4">
                 <section
-                    class="rounded-3xl bg-[#EEE9DF] p-8 text-[#302D2A]"
+                    class="rounded-3xl bg-paper p-8 text-ink"
                     aria-labelledby="ano-em-livros"
                 >
                     <div class="flex items-center justify-between">
@@ -76,7 +76,7 @@ function salvarMeta() {
                         >
                             Seu ano em livros
                         </h2>
-                        <Estrela />
+                        <Estrela class="text-brown" />
                     </div>
 
                     <p class="lora mt-7 text-7xl leading-none">{{ livrosLidos }}</p>
@@ -86,7 +86,7 @@ function salvarMeta() {
                     </p>
 
                     <div
-                        class="mt-6 h-1.5 overflow-hidden rounded-full bg-[#DDD8CF]"
+                        class="mt-6 h-1.5 overflow-hidden rounded-full bg-line"
                         role="progressbar"
                         :aria-valuenow="livrosLidos"
                         aria-valuemin="0"
@@ -99,7 +99,7 @@ function salvarMeta() {
                         ></div>
                     </div>
 
-                    <p class="mt-6 text-base leading-relaxed text-[#827B73]">
+                    <p class="mt-6 text-base leading-relaxed text-light-brown">
                         {{ livrosLidos }} de {{ meta }} livros da sua meta.
                         <template v-if="livrosLidos < meta">
                             Mais {{ meta - livrosLidos }}
@@ -131,12 +131,12 @@ function salvarMeta() {
                                 type="number"
                                 min="1"
                                 required
-                                class="rounded-md border border-[#C8B9A7] bg-white px-3 py-2 text-[#302D2A]"
+                                class="rounded-md border border-line-strong bg-input px-3 py-2 text-ink"
                             />
                         </label>
                         <button
                             type="submit"
-                            class="rounded-md bg-brown px-3 py-2 text-sm font-medium text-white"
+                            class="rounded-md bg-brown px-3 py-2 text-sm font-medium text-on-brown"
                         >
                             Salvar
                         </button>
@@ -150,18 +150,18 @@ function salvarMeta() {
                     </form>
                 </section>
 
-                <section class="rounded-2xl border border-[#E1DCD2] bg-[#FFFEFA] p-5 text-[#302D2A]" aria-labelledby="pequenos-avancos">
+                <section class="rounded-2xl border border-line bg-input p-5 text-ink" aria-labelledby="pequenos-avancos">
                     <h2 id="pequenos-avancos" class="lora text-lg">Pequenos avanços</h2>
                     <p class="lora mt-4 text-2xl">{{ paginasLidasNoMes }}</p>
-                    <p class="text-xs text-[#827B73]">páginas lidas neste mês</p>
+                    <p class="text-xs text-light-brown">páginas lidas neste mês</p>
                     <p class="lora mt-4 text-2xl">{{ diasLeituraNoMes }}</p>
-                    <p class="text-xs text-[#827B73]">{{ diasLeituraNoMes === 1 ? "dia" : "dias" }} com leitura neste mês</p>
+                    <p class="text-xs text-light-brown">{{ diasLeituraNoMes === 1 ? "dia" : "dias" }} com leitura neste mês</p>
                 </section>
 
-                <section class="px-5 py-3 text-[#4B4239]" aria-label="Citação do dia">
-                    <p class="text-xl leading-none text-[#785A3E]" aria-hidden="true">❞</p>
-                    <blockquote class="lora mt-2 text-base">“Cada escolha abre uma vida diferente.”</blockquote>
-                    <p class="mt-2 text-xs text-[#827B73]">Sua nota · A Biblioteca da Meia-Noite, hoje, às 20:42</p>
+                <section class="px-5 py-3 text-ink" aria-label="Citação do dia">
+                    <p class="text-xl leading-none text-brown" aria-hidden="true">❞</p>
+                    <blockquote class="mt-2 font-leitura text-base">“Cada escolha abre uma vida diferente.”</blockquote>
+                    <p class="mt-2 text-xs text-light-brown">Sua nota · A Biblioteca da Meia-Noite, hoje, às 20:42</p>
                 </section>
             </aside>
         </div>

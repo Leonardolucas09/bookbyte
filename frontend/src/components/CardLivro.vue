@@ -9,7 +9,7 @@ const props = defineProps({
 
 <template>
     <RouterLink :to="`/livro/${livro.id}`" class="flex flex-col gap-2 w-48 cursor-pointer">
-        <div class="flex  w-fit rounded-md bg-[#EEE9DF] px-8 py-3">
+        <div class="flex  w-fit rounded-md bg-paper px-8 py-3">
             <img
                 :src="livro.capa"
                 :alt="`Capa de ${livro.titulo}`"
@@ -18,14 +18,14 @@ const props = defineProps({
         </div>
         <div class="flex max-w-md flex-col gap-2">
             <div>
-                <h4 class="lora text-lg font-semibold">{{ livro.titulo }}</h4>
-                <span class="text-sm text-light-brown">{{ livro.autor }}</span>
+                <h4 :title="livro.titulo" class="lora line-clamp-2 min-h-14 text-lg font-semibold">{{ livro.titulo }}</h4>
+                <span :title="livro.autor" class="block truncate text-sm text-light-brown">{{ livro.autor }}</span>
             </div>
             <div class="flex items-center justify-between">
                 <StatusLeitura :status="livro.statusLeitura" />
                 <span
                     v-if="livro.statusLeitura === 'Lendo' && livro.paginas > 0"
-                    class="text-lg font-medium text-[#765B3F]"
+                    class="text-lg font-medium text-brown"
                 >
                     {{ Math.round((livro.paginasLidas / livro.paginas) * 100) }}%
                 </span>

@@ -1,8 +1,8 @@
 <script setup>
 defineProps({
     text: { type: String, default: "" },
-    color: { type: String, default: "#785A3E" },
-    textColor: { type: String, default: "#FFFEFA" },
+    color: { type: String, default: "var(--tema-brown)" },
+    textColor: { type: String, default: "var(--tema-on-brown)" },
     type: { type: String, default: "button" },
     disabled: { type: Boolean, default: false },
 });

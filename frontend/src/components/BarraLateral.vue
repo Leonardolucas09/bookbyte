@@ -40,7 +40,7 @@ const menuItems = [
 
         <div class="flex flex-col gap-4 px-10 pb-10">
             <IconeCafe class="size-6 text-brown" />
-            <p class="font-lora text-xl text-olive-900">
+            <p class="font-lora text-xl text-ink">
                 Reserve um tempo para uma boa história.
             </p>
             <p class="text-xs text-light-brown">

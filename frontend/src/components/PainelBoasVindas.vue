@@ -8,12 +8,12 @@ defineProps({
 </script>
 
 <template>
-    <section class="flex flex-1 flex-col gap-20 bg-[#EEE9DF]">
+    <section class="flex flex-1 flex-col gap-20 bg-paper">
         <div class="flex h-full flex-col gap-20 p-10">
             <LogoBookByte />
             <div class="flex flex-col gap-5">
                 <span class="text-sm uppercase text-brown">Um capítulo de cada vez</span>
-                <h2 class="lora text-5xl text-olive-900">
+                <h2 class="lora text-5xl text-ink">
                     {{ titulo }}
                 </h2>
                 <span class="text-base text-light-brown">Organize seus livros, acompanhe cada página e guarde o que a leitura deixa em você.</span>
@@ -30,7 +30,7 @@ defineProps({
             </div>
 
             <div>
-                <h4 class="lora text-3xl text-olive-900">
+                <h4 class="lora text-3xl text-ink">
                     Não importa a velocidade. Toda página é um novo lugar.
                 </h4>
                 <span class="text-sm text-light-brown">Sua leitura, no seu ritmo.</span>

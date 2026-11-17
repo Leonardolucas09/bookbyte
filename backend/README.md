@@ -77,6 +77,56 @@ POST /api/login
 
 O token vale por 7 dias. O front guarda ele no navegador e, sem ele, só deixa abrir as telas de login, cadastro e recuperar senha.
 
+## Perfil e preferências
+
+Todas exigem `Authorization: Bearer <token>`.
+
+```http
+GET /api/usuario
+```
+
+Devolve `{ id, nomeUsuario, email, preferencias }`.
+
+```http
+PATCH /api/usuario/perfil
+{ "nomeUsuario": "camila", "email": "camila@email.com" }
+```
+
+| Situação | Status |
+|---|---|
+| Deu certo | 200, com o usuário atualizado |
+| Campo vazio ou e-mail sem @ | 400 |
+| E-mail ou nome de usuário já usado por outra conta | 409 |
+
+```http
+PATCH /api/usuario/preferencias
+{ "metaLivros": 20, "tema": "sepia" }
+```
+
+Mande só os campos que mudaram. Campo desconhecido ou valor fora da lista dá 400.
+
+| Campo | Valores |
+|---|---|
+| `metaLivros` | inteiro de 0 a 1000 |
+| `unidadeProgresso` | `paginas`, `porcentagem` |
+| `lembreteLeitura`, `novidadesEmail` | `true`, `false` |
+| `tema` | `claro`, `sepia`, `escuro` |
+| `fonteLeitura` | `lora`, `inter` |
+| `tamanhoTexto` | `pequeno`, `medio`, `grande` |
+
+Em um banco já criado, execute uma vez:
+
+```sql
+ALTER TABLE usuario
+    ADD COLUMN meta_livros INT NOT NULL DEFAULT 20,
+    ADD COLUMN unidade_progresso VARCHAR(20) NOT NULL DEFAULT 'paginas',
+    ADD COLUMN lembrete_leitura BOOLEAN NOT NULL DEFAULT TRUE,
+    ADD COLUMN novidades_email BOOLEAN NOT NULL DEFAULT FALSE,
+    ADD COLUMN tema VARCHAR(20) NOT NULL DEFAULT 'claro',
+    ADD COLUMN fonte_leitura VARCHAR(20) NOT NULL DEFAULT 'lora',
+    ADD COLUMN tamanho_texto VARCHAR(20) NOT NULL DEFAULT 'medio';
+```
+
 ## Buscar livros
 
 ```
