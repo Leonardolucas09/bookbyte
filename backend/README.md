@@ -33,6 +33,16 @@ POST /api/cadastro
 
 A senha nunca é salva: o banco guarda só o hash dela (bcrypt).
 
+## Estante
+
+Estas rotas precisam do token do login (`Authorization: Bearer <token>`). Cada usuário só vê e altera a própria estante.
+
+| Rota | O que faz |
+|---|---|
+| `GET /api/estante` | Lista os livros da estante do usuário |
+| `POST /api/estante` | Adiciona um livro (o mesmo formato que vem da busca). Responde 409 se ele já estiver na estante |
+| `PATCH /api/estante/:id/leitura` | Atualiza status, páginas lidas e nota (veja abaixo) |
+
 ## Atualizar o progresso e a nota pessoal de leitura
 
 ```http

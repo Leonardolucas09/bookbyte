@@ -14,9 +14,21 @@ const CAMPOS = [
     "editions.cover_i",
 ].join(",");
 
-export async function buscarLivros(termo) {
+// Busca por título, autor ou ISBN (campo de busca do topo)
+export function buscarLivros(termo) {
+    return pedirOpenLibrary(`q=${encodeURIComponent(termo)}&limit=20`);
+}
+
+// Livros bem avaliados de um assunto, só com edição em português (tela Descobrir)
+// Sem assunto, traz os mais bem avaliados de todos os assuntos.
+export function buscarPorAssunto(assunto) {
+    const consulta = assunto ? `subject:${assunto} language:por` : "language:por";
+    return pedirOpenLibrary(`q=${encodeURIComponent(consulta)}&sort=rating&limit=9`);
+}
+
+async function pedirOpenLibrary(parametros) {
     // lang=pt faz a Open Library trazer a edição em português, quando existe
-    const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(termo)}&lang=pt&limit=20&fields=${CAMPOS}`;
+    const url = `https://openlibrary.org/search.json?${parametros}&lang=pt&fields=${CAMPOS}`;
 
     // Se a Open Library demorar mais de 8 segundos, a gente desiste
     const resposta = await fetch(url, { signal: AbortSignal.timeout(8000) });

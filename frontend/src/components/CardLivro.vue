@@ -1,17 +1,14 @@
 ﻿<script setup>
 import StatusLeitura from './StatusLeitura.vue';
 import BarraProgresso from './BarraProgresso.vue';
-import AtualizarLeitura from '../modals/AtualizarLeitura.vue';
-import { ref } from 'vue';
 
 const props = defineProps({
     livro: { type: Object, required: true },
 });
-const modalAberto = ref(false);
 </script>
 
 <template>
-    <a @click="modalAberto = true" class="flex flex-col gap-2 w-48 cursor-pointer">
+    <RouterLink :to="`/livro/${livro.id}`" class="flex flex-col gap-2 w-48 cursor-pointer">
         <div class="flex  w-fit rounded-md bg-paper px-8 py-3">
             <img
                 :src="livro.capa"
@@ -39,11 +36,5 @@ const modalAberto = ref(false);
                 :total-paginas="livro.paginas"
             />
         </div>
-    </a>
-    <AtualizarLeitura
-        v-if="modalAberto"
-        :livro="livro"
-        @fechar="modalAberto = false"
-        @salvo="modalAberto = false"
-    />
+    </RouterLink>
 </template>
