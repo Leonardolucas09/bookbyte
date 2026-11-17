@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { buscarLivros } from "./openLibrary.js";
+import { buscarLivros, buscarPorAssunto } from "./openLibrary.js";
 import { cadastrar, entrar } from "./usuarios.js";
 import { verificarLogin } from "./verificarLogin.js";
 import { listarEstante, adicionarLivro, atualizarLeitura } from "./estante.js";
@@ -17,6 +17,34 @@ app.post("/api/login", entrar);
 app.get("/api/estante", verificarLogin, listarEstante);
 app.post("/api/estante", verificarLogin, adicionarLivro);
 app.patch("/api/estante/:id/leitura", verificarLogin, atualizarLeitura);
+
+// Categorias da tela Descobrir e o assunto (subject) delas na Open Library
+const CATEGORIAS = {
+    "todos": null,
+    "ficcao": "fiction",
+    "literatura-brasileira": "brazilian_literature",
+    "fantasia": "fantasy",
+    "classicos": "classic_literature",
+    "nao-ficcao": "nonfiction",
+};
+
+// Exemplo: GET http://localhost:3000/api/livros/descobrir?categoria=fantasia
+app.get("/api/livros/descobrir", async (req, res) => {
+    const categoria = req.query.categoria ?? "todos";
+
+    if (!(categoria in CATEGORIAS)) {
+        return res.status(400).json({ erro: "Categoria inválida." });
+    }
+
+    try {
+        const livros = await buscarPorAssunto(CATEGORIAS[categoria]);
+        res.json({ livros });
+    }
+    catch (erro) {
+        console.error(erro.message);
+        res.status(503).json({ erro: "Não foi possível carregar as sugestões agora. Tente de novo em instantes." });
+    }
+});
 
 // Exemplo: GET http://localhost:3000/api/livros/busca?q=duna
 app.get("/api/livros/busca", async (req, res) => {
